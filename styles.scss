@@ -1,0 +1,115 @@
+// Variables
+:root {
+    --focus: OliveDrab;
+}
+
+// Main stuffs
+body {
+    font-family: 'Ubuntu';
+    display: grid;
+    grid-template-columns: 50% 50%;
+    h1:first-child {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+// Focus stuffs
+*:focus {
+    outline-color: var(--focus, red);
+}
+
+// Navigations
+nav {
+    ul, ol {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        ul {
+            display: none;
+        }
+        li:hover, li:focus-within {
+            ul {
+                display: block;
+            }
+        }
+    }
+    ol {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        text-align: center;
+    }
+}
+
+// Progress bar
+progress {
+    width: 100%;
+}
+
+// Form related stuff
+form {
+    label {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+label {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    svg {
+        order: -1;
+        width: 2em;
+        height: 2em;
+    }
+}
+
+input, button {
+    display: block;
+}
+
+input[type=radio] {
+    // Display none cancels the focus interactions
+    // The opacity hides it, further on, in the grid these fields are specified as having no size
+    opacity: 0;
+    &:checked + label {
+        background-color: red;
+    }
+    // Added width:0 and height:0 for non-firefox browsers since they're not displaying the fieldset as flexbox/grid
+    width: 0;
+    height: 0;
+}
+
+fieldset {
+    display: grid;
+    grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
+    &:focus-within {
+        border-color: var(--focus);
+    }
+}
+
+// Article-like
+article {
+    
+}
+
+// Figure display
+figure {
+    @media screen and (orientation: landscape){
+        img:first-of-type {
+            display: none;
+        }
+    }
+    @media screen and (orientation: portrait){
+        img:last-of-type {
+            display: none;
+        }
+    }
+}
