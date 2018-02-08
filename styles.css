@@ -5,16 +5,36 @@
   --trans: .2s;
   --chat-receive: #90CAF9;
   --chat-send: #81C784;
+  --chat-bg: gainsboro;
+  --bg: #0A1612;
+  --accent: #76323F;
+  --text: #C5C1C0;
+  --text-inactive: #89898d;
+  --hide: transparent;
+  --show: black;
 }
 
 body {
   font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
   margin: 0;
+  font-size: 1.4em;
+  line-height: 1.4em;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+body > h1 {
+  margin: 1em 0;
+  padding: 0 1em;
 }
 
 img {
   min-width: 100%;
   max-width: 100%;
+}
+
+a {
+  color: var(--text);
 }
 
 *:focus {
@@ -25,12 +45,15 @@ img {
 nav ul, nav ol {
   list-style: none;
   padding: 0;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 2fr));
+  grid-gap: .2em;
+  text-align: center;
 }
 
 nav ul ul, nav ol ul {
   display: none;
+  width: 100%;
 }
 
 nav ul li:hover, nav ul li:focus-within, nav ol li:hover, nav ol li:focus-within {
@@ -49,7 +72,27 @@ nav ol {
 }
 
 nav progress + ol {
-  color: green;
+  color: var(--text-inactive);
+}
+
+nav:first-of-type {
+  background-color: var(--accent);
+}
+
+nav:first-of-type h1 {
+  display: none;
+}
+
+nav:first-of-type li:hover, nav:first-of-type li:focus-within, nav:first-of-type li ul {
+  background-color: #dbe649;
+}
+
+nav:first-of-type li a {
+  color: var(--bg);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: .5em 0;
 }
 
 progress {
@@ -65,33 +108,40 @@ form label {
   justify-content: flex-start;
 }
 
-label {
+fieldset label {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  font-size: 1.2em;
+  justify-content: flex-end;
+  position: relative;
+  color: var(--hide);
 }
 
-label svg {
+fieldset label svg {
   order: -1;
   width: 2em;
   height: 2em;
   transition: calc(var(--trans) * 2);
   filter: grayscale(100%);
   cursor: pointer;
+  position: absolute;
+  bottom: 0;
 }
 
 input, button {
   display: block;
-  font-size: 1.4em;
-  padding: .5em;
+  font-size: 1.1em;
   margin-bottom: 1em;
   margin-top: .5em;
+  padding: .2em;
 }
 
 input:required, button:required {
   color: blue;
+}
+
+input {
+  padding: .5em;
 }
 
 input[type=radio] {
@@ -100,6 +150,12 @@ input[type=radio] {
 
 input[type=radio]:checked + label svg {
   filter: grayscale(0);
+  transform: scale(1.5);
+}
+
+fieldset {
+  padding: 2em 0;
+  border: none;
 }
 
 fieldset > div {
@@ -107,18 +163,22 @@ fieldset > div {
   grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
 }
 
-fieldset:focus-within {
-  border-color: var(--focus);
+fieldset:focus-within svg {
+  filter: grayscale(70%);
 }
 
-article, #chat {
+legend {
+  font-size: 1.4em;
+}
+
+article, #chat, body > form {
   padding: 1em 2em;
 }
 
-p {
+article, #chat > *, form, fieldset, nav:nth-of-type(2) {
   max-width: 40em;
-  font-size: 1.4em;
-  line-height: 1.4em;
+  margin: 0 auto;
+  display: block;
 }
 
 figure {
@@ -143,7 +203,8 @@ figure figcaption footer {
 }
 
 #chat {
-  background-color: #f0f0f0;
+  background-color: var(--chat-bg);
+  color: var(--bg);
 }
 
 #chat ol {
@@ -152,7 +213,7 @@ figure figcaption footer {
 }
 
 #chat ol li {
-  background-color: var(--chat-receive);
+  background-color: var(--chat-send);
   border-radius: 1em;
   padding: .5em 1em;
   margin-bottom: .8em;
@@ -164,7 +225,7 @@ figure figcaption footer {
 }
 
 #chat ol li.send {
-  background-color: var(--chat-send);
+  background-color: var(--chat-receive);
 }
 
 #chat ol footer {
@@ -174,25 +235,16 @@ figure figcaption footer {
 
 #chat ol footer p {
   z-index: 2;
-  font-size: 1em;
+  font-size: .8em;
 }
 
 #chat ol footer p + p {
-  overflow: hidden;
-  text-indent: -999em;
+  color: var(--hide);
 }
 
 #chat ol footer p::before {
-  text-indent: 0;
   float: right;
-}
-
-#chat ol footer p[data-status=DELIVERED]::before {
-  content: '📬';
-}
-
-#chat ol footer p[data-status=READ]::before {
-  content: '📭';
+  color: var(--show);
 }
 
 #chat ol footer p:first-of-type::after {
@@ -203,10 +255,18 @@ figure figcaption footer {
   bottom: 0;
   z-index: -1;
   right: 0;
-  background-color: var(--chat-send);
+  background-color: var(--chat-receive);
 }
 
 #chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::after {
   left: 0;
-  background-color: var(--chat-receive);
+  background-color: var(--chat-send);
+}
+
+[data-status=DELIVERED]::before {
+  content: '📬';
+}
+
+[data-status=READ]::before {
+  content: '📭';
 }

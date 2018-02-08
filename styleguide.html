@@ -115,7 +115,7 @@
                         <p data-status="READ">Has been read</p>
                     </footer>
                 </li>
-                <!-- Added send class to define messages that are send. This could be catched by the :has() selector that currently isn't implemented anywhere https://caniuse.com -->
+                <!-- Added send class to define messages that are send. This could be catched by the :has() selector that currently isn't implemented anywhere https://caniuse.com - Note this class is only used -->
                 <li class="changed send">
                     <p>Hey! Sorry I was busy</p>
                     <footer> <!-- child-count selector -->
@@ -136,5 +136,10 @@
                 <button type="submit">Send</button>
             </form>
         </section>
-    </body>
+	</body>
+	<script>
+		// Log all changed HTML from the components
+		console.log('These are all changed elements');
+		console.log(document.querySelectorAll('.changed'));
+	</script>
 </html>

@@ -4,13 +4,28 @@
     --required: '*';
     --trans: .2s;
     --chat-receive: #90CAF9;
-    --chat-send: #81C784;
+	--chat-send: #81C784;
+	--chat-bg: rgb(220,220,220);
+	--bg: #0A1612;
+	--accent: #76323F;
+	--text: #C5C1C0;
+	--text-inactive: rgb(137, 137, 141);
+	--hide: rgba(0,0,0,0);
+	--show: rgba(0,0,0,1);
 }
 
 // Main stuffs
 body {
     font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
-    margin: 0;
+	margin: 0;
+	font-size: 1.4em;
+	line-height: 1.4em;
+	color: var(--text);
+	background-color: var(--bg);
+	> h1 {
+		margin: 1em 0;
+		padding: 0 1em;
+	}
     // display: grid;
     // grid-template-columns: 50% 50%;
     // h1:first-child {
@@ -24,11 +39,19 @@ img {
     max-width: 100%;
 }
 
+p {
+    // max-width: 40em;
+}
+
+a {
+	color: var(--text);
+}
+
 // Focus stuffs
 *:focus {
     // border-style: solid;
     border-color: var(--focus, red);
-    outline-color: var(--focus, red);
+	outline-color: var(--focus, red);
 }
 
 // Navigations
@@ -36,16 +59,23 @@ nav {
     ul, ol {
         list-style: none;
         padding: 0;
-        display: flex;
-        justify-content: space-around;
+		// display: flex;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10em, 2fr));
+		grid-gap: .2em;
+		text-align: center;
+		// justify-content: space-around;
+		// flex-wrap: wrap;
+		// Dropdown
         ul {
-            display: none;
+			display: none;
+			width: 100%;
         }
         li:hover, li:focus-within {
             position: relative;
             ul {
                 position: absolute;
-                display: block;
+				display: block;
             }
         }
     }
@@ -56,9 +86,33 @@ nav {
     }
     progress {
         + ol {
-            color: green;
+            color: var(--text-inactive);
         }
     }
+}
+
+nav:first-of-type {
+	background-color: var(--accent);
+	h1 {
+		display: none;
+	}
+	li {
+		// background-color: rgba(219, 230, 73, 0.507);
+		// padding: .6em 4em;
+		// margin: 0 1em;
+		// text-align: center;
+		// width: 25%;
+		&:hover, &:focus-within, ul {
+			background-color: rgba(219, 230, 73, 1);
+		}
+		a {
+			color: var(--bg);
+			text-decoration: none;
+			display: block;
+			width: 100%;
+			padding: .5em 0;
+		}
+	}
 }
 
 // Progress bar
@@ -78,32 +132,39 @@ form {
     }
 }
 
-label {
+fieldset label {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    font-size: 1.2em;
+    justify-content: flex-end;
+	position: relative;
+	color: var(--hide);
     svg {
         order: -1;
         width: 2em;
         height: 2em;
         transition: calc(var(--trans) * 2);
         filter: grayscale(100%);
-        cursor: pointer;
+		cursor: pointer;
+		position: absolute;
+		bottom: 0;
     }
 }
 
 input, button {
     display: block;
-    font-size: 1.4em;
-    padding: .5em;
+    font-size: 1.1em;
     margin-bottom: 1em;
-    margin-top: .5em;
+	margin-top: .5em;
+	padding: .2em;
     &:required {
-        color: blue;
+		color: blue;
         // We cannot use after's on inputs
     }
+}
+
+input {
+	padding: .5em;
 }
 
 input[type=radio] {
@@ -112,30 +173,39 @@ input[type=radio] {
     opacity: 0;
     &:checked + label {
         svg {
-            filter: grayscale(0);
+			filter: grayscale(0);
+			transform: scale(1.5);
         }
     }
 }
 
 fieldset {
-    > div {
+	padding: 2em 0;
+	border: none;
+    > div { // Added to support flex/grid view in a fieldset
         display: grid;
         grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
     }
     &:focus-within {
-        border-color: var(--focus);
+		svg {
+			filter: grayscale(70%);
+		}
     }
 }
 
-// Article-like
-article, #chat {
-    padding: 1em 2em;
+legend {
+	font-size: 1.4em;
 }
 
-p {
-    max-width: 40em;
-    font-size: 1.4em;
-    line-height: 1.4em;
+// Article-like
+article, #chat, body > form {
+	padding: 1em 2em;
+}
+
+article, #chat > *, form, fieldset, nav:nth-of-type(2) {
+	max-width: 40em;
+	margin: 0 auto;
+	display: block;
 }
 
 // Figure display
@@ -165,12 +235,13 @@ figure {
 
 // Chat
 #chat {
-    background-color: rgb(240,240,240);
+	background-color: var(--chat-bg);
+	color: var(--bg);
     ol {
         padding: 0;
         list-style: none;
         li {
-            background-color: var(--chat-receive);
+            background-color: var(--chat-send);
             border-radius: 1em;
             padding: .5em 1em;
             margin-bottom: .8em;
@@ -179,7 +250,7 @@ figure {
                 margin: 0;
             }
             &.send { // Use this only for the block level, not the chat-footer
-                background-color: var(--chat-send);
+                background-color: var(--chat-receive);
             }
         }
         footer {
@@ -187,49 +258,45 @@ figure {
             justify-content: space-between;
             p {
                 z-index: 2;
-                font-size: 1em;
+                font-size: .8em;
                 + p {
-                    overflow: hidden;
-                    text-indent: -999em;
+					// Hide the text while still be able to show the icon
+					color: var(--hide);
                 }
                 &::before {
-                    text-indent: 0;
-                    float: right;
-                }
-                &[data-status=DELIVERED] {
-                    &::before {
-                        content: '📬';
-                    }
-                }
-                &[data-status=READ] {
-                    &::before {
-                        content: '📭';
-                    }
+					float: right;
+					color: var(--show);
                 }
                 &:first-of-type { // Always the 'Posted On' text
-                    &::after {
+                    &::after { // Block corner fill
                         content: ' ';
-                        white-space: pre;
+                        white-space: pre; // Force rendering of the space. This could also be solved by using a unicode character
                         width: 1em;
                         position: absolute;
                         bottom: 0;
                         z-index: -1;
                         right: 0;
-                        background-color: var(--chat-send);
+                        background-color: var(--chat-receive);
                     }
                 }
                 &:nth-last-child(n+2)::after, &:nth-last-child(n+2) ~ p::after { // Both P's IF there is at least 2
-                    left: 0;
-                    background-color: var(--chat-receive);
+					 // Block corner fill
+					left: 0;
+                    background-color: var(--chat-send);
                 }
             }
-            
-            // p:nth-last-child(n+2), p:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
-            //     &::after {
-            //         left: 0;
-            //         background-color: var(--chat-receive);
-            //     }
-            // }
         }
     }
+}
+
+// Define icons
+[data-status=DELIVERED] {
+	&::before {
+		content: '📬';
+	}
+}
+[data-status=READ] {
+	&::before {
+		content: '📭';
+	}
 }

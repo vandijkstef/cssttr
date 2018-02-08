@@ -24,7 +24,7 @@ Explored CSS grid with CSSGridGarden, tried basic use of CSS variables with the 
 ## Thursday 8th of February 2018
 Decided to add a div to the fieldset to support grid styling. Discovered that checkboxes are not listening to styles as they should be. Also, input fields are not accepting ::after styles since they are not real 'containers'. Read and used quantity selector (styling by sibling count).
 
-# Future/Planning
+# Future/Planning/Todo
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
 - [ ] Fancy ampersands
 - [ ] De-emphasize by dimming
