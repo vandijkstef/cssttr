@@ -22,14 +22,14 @@ Explored CSS grid with CSSGridGarden, tried basic use of CSS variables with the 
 
 # Future/Planning
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
-[ ] Full responsiveness for all components
-[ ] Fancy ampersands
-[ ] De-emphasize by dimming
-[ ] De-emphasize by blurring
-[ ] Intrinsic sizing
-[ ] Styling by sibling count
-[ ] Vertical centering
-[ ] Decide on advanced features
+- [ ] Full responsiveness for all components
+- [ ] Fancy ampersands
+- [ ] De-emphasize by dimming
+- [ ] De-emphasize by blurring
+- [ ] Intrinsic sizing
+- [ ] Styling by sibling count
+- [ ] Vertical centering
+- [ ] Decide on advanced features
 
 # Sources
 
