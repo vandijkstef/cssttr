@@ -1,25 +1,30 @@
 // Variables
 :root {
     --focus: OliveDrab;
+    --required: '*';
+    --trans: .2s;
 }
 
 // Main stuffs
 body {
-    font-family: 'Ubuntu';
-    display: grid;
-    grid-template-columns: 50% 50%;
-    h1:first-child {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
+    font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif
+    // display: grid;
+    // grid-template-columns: 50% 50%;
+    // h1:first-child {
+    //     grid-column-start: 1;
+    //     grid-column-end: 3;
+    // }
 }
 
 img {
+    min-width: 100%;
     max-width: 100%;
 }
 
 // Focus stuffs
 *:focus {
+    // border-style: solid;
+    border-color: var(--focus, red);
     outline-color: var(--focus, red);
 }
 
@@ -34,7 +39,9 @@ nav {
             display: none;
         }
         li:hover, li:focus-within {
+            position: relative;
             ul {
+                position: absolute;
                 display: block;
             }
         }
@@ -44,15 +51,24 @@ nav {
         grid-template-columns: 25% 25% 25% 25%;
         text-align: center;
     }
+    progress {
+        + ol {
+            color: green;
+        }
+    }
 }
 
 // Progress bar
 progress {
+    // TODO: Anim
     width: 100%;
 }
 
 // Form related stuff
 form {
+    // [autofocus] {
+    //     display: none; // TODO: Temp disable to kill autofocus
+    // }
     label {
         flex-direction: row;
         justify-content: flex-start;
@@ -64,32 +80,45 @@ label {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    font-size: 1.2em;
     svg {
         order: -1;
         width: 2em;
         height: 2em;
+        transition: calc(var(--trans) * 2);
+        filter: grayscale(100%);
+        cursor: pointer;
     }
 }
 
 input, button {
     display: block;
+    font-size: 1.4em;
+    padding: .5em;
+    margin-bottom: 1em;
+    margin-top: .5em;
+    &:required {
+        color: blue;
+        // We cannot use after's on inputs
+    }
 }
 
 input[type=radio] {
     // Display none cancels the focus interactions
-    // The opacity hides it, further on, in the grid these fields are specified as having no size
+    // The opacity hides it, in the CSS grid these fields are specified as having no size
     opacity: 0;
     &:checked + label {
-        background-color: red;
+        svg {
+            filter: grayscale(0);
+        }
     }
-    // Added width:0 and height:0 for non-firefox browsers since they're not displaying the fieldset as flexbox/grid
-    width: 0;
-    height: 0;
 }
 
 fieldset {
-    display: grid;
-    grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
+    > div {
+        display: grid;
+        grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
+    }
     &:focus-within {
         border-color: var(--focus);
     }
@@ -97,19 +126,62 @@ fieldset {
 
 // Article-like
 article {
-    
+    padding: 1em 2em;
+}
+
+p {
+    max-width: 40em;
+    font-size: 1.4em;
+    line-height: 1.4em;
 }
 
 // Figure display
 figure {
+    // TODO: What if we only have one image?
+    // Or a video?
+    // TODO: Do we wanna overlay the title/text (on hover/focus)
+    margin: 0; // Let the figure take up all the space
     @media screen and (orientation: landscape){
         img:first-of-type {
             display: none;
         }
     }
     @media screen and (orientation: portrait){
-        img:last-of-type {
+        // img:last-of-type {
+        img:nth-of-type(2) {
             display: none;
+        }
+    }
+    figcaption {
+        footer {
+            font-style: italic;
+            text-align: right;
+        }
+    }
+}
+
+// Chat
+#chat ol {
+    padding: 0;
+    list-style: none;
+    li {
+        border: 1px solid red;
+    }
+    footer {
+        display: flex;
+        p { // Every P
+            font-size: 1em;
+            color: yellow; // Will be overriden by the other options
+        }
+        p:first-of-type { // Always the 'Posted On' text
+            color: blue;
+        }
+        p + p { // Always the second P
+            text-align: right;
+            color: red;
+        }
+        p:nth-last-child(n+2), p:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
+            color: green;
         }
     }
 }
