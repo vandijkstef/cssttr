@@ -22,16 +22,14 @@ Placed all components in the styleguide.html. Created basic focus CSS for most o
 Explored CSS grid with CSSGridGarden, tried basic use of CSS variables with the colors.
 
 ## Thursday 8th of February 2018
-Decided to add a div to the fieldset to support grid styling. Discovered that checkboxes are not listening to styles as they should be. Also, input fields are not accepting ::after styles since they are not real 'containers'
+Decided to add a div to the fieldset to support grid styling. Discovered that checkboxes are not listening to styles as they should be. Also, input fields are not accepting ::after styles since they are not real 'containers'. Read and used quantity selector (styling by sibling count).
 
 # Future/Planning
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
-- [ ] Full responsiveness for all components
 - [ ] Fancy ampersands
 - [ ] De-emphasize by dimming
 - [ ] De-emphasize by blurring
 - [ ] Intrinsic sizing
-- [ ] Styling by sibling count
 - [ ] Vertical centering
 - [ ] Decide on advanced features
 - [ ] Provide skip to content link on top of the page (with concern of any autofocus fields on the page)

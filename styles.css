@@ -1,11 +1,15 @@
+@charset "UTF-8";
 :root {
   --focus: OliveDrab;
   --required: '*';
   --trans: .2s;
+  --chat-receive: #90CAF9;
+  --chat-send: #81C784;
 }
 
 body {
   font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
 img {
@@ -50,6 +54,10 @@ nav progress + ol {
 
 progress {
   width: 100%;
+}
+
+form [autofocus] {
+  display: none;
 }
 
 form label {
@@ -103,7 +111,7 @@ fieldset:focus-within {
   border-color: var(--focus);
 }
 
-article {
+article, #chat {
   padding: 1em 2em;
 }
 
@@ -134,33 +142,71 @@ figure figcaption footer {
   text-align: right;
 }
 
+#chat {
+  background-color: #f0f0f0;
+}
+
 #chat ol {
   padding: 0;
   list-style: none;
 }
 
 #chat ol li {
-  border: 1px solid red;
+  background-color: var(--chat-receive);
+  border-radius: 1em;
+  padding: .5em 1em;
+  margin-bottom: .8em;
+  position: relative;
+}
+
+#chat ol li p {
+  margin: 0;
+}
+
+#chat ol li.send {
+  background-color: var(--chat-send);
 }
 
 #chat ol footer {
   display: flex;
+  justify-content: space-between;
 }
 
 #chat ol footer p {
+  z-index: 2;
   font-size: 1em;
-  color: yellow;
-}
-
-#chat ol footer p:first-of-type {
-  color: blue;
 }
 
 #chat ol footer p + p {
-  text-align: right;
-  color: red;
+  overflow: hidden;
+  text-indent: -999em;
 }
 
-#chat ol footer p:nth-last-child(n+2), #chat ol footer p:nth-last-child(n+2) ~ p {
-  color: green;
+#chat ol footer p::before {
+  text-indent: 0;
+  float: right;
+}
+
+#chat ol footer p[data-status=DELIVERED]::before {
+  content: '📬';
+}
+
+#chat ol footer p[data-status=READ]::before {
+  content: '📭';
+}
+
+#chat ol footer p:first-of-type::after {
+  content: ' ';
+  white-space: pre;
+  width: 1em;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  right: 0;
+  background-color: var(--chat-send);
+}
+
+#chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::after {
+  left: 0;
+  background-color: var(--chat-receive);
 }

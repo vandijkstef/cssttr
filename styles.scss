@@ -3,11 +3,14 @@
     --focus: OliveDrab;
     --required: '*';
     --trans: .2s;
+    --chat-receive: #90CAF9;
+    --chat-send: #81C784;
 }
 
 // Main stuffs
 body {
-    font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif
+    font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
+    margin: 0;
     // display: grid;
     // grid-template-columns: 50% 50%;
     // h1:first-child {
@@ -66,9 +69,9 @@ progress {
 
 // Form related stuff
 form {
-    // [autofocus] {
-    //     display: none; // TODO: Temp disable to kill autofocus
-    // }
+    [autofocus] {
+        display: none; // TODO: Temp disable to kill autofocus
+    }
     label {
         flex-direction: row;
         justify-content: flex-start;
@@ -125,7 +128,7 @@ fieldset {
 }
 
 // Article-like
-article {
+article, #chat {
     padding: 1em 2em;
 }
 
@@ -161,27 +164,72 @@ figure {
 }
 
 // Chat
-#chat ol {
-    padding: 0;
-    list-style: none;
-    li {
-        border: 1px solid red;
-    }
-    footer {
-        display: flex;
-        p { // Every P
-            font-size: 1em;
-            color: yellow; // Will be overriden by the other options
+#chat {
+    background-color: rgb(240,240,240);
+    ol {
+        padding: 0;
+        list-style: none;
+        li {
+            background-color: var(--chat-receive);
+            border-radius: 1em;
+            padding: .5em 1em;
+            margin-bottom: .8em;
+            position: relative; // For the footer::after
+            p {
+                margin: 0;
+            }
+            &.send { // Use this only for the block level, not the chat-footer
+                background-color: var(--chat-send);
+            }
         }
-        p:first-of-type { // Always the 'Posted On' text
-            color: blue;
-        }
-        p + p { // Always the second P
-            text-align: right;
-            color: red;
-        }
-        p:nth-last-child(n+2), p:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
-            color: green;
+        footer {
+            display: flex;
+            justify-content: space-between;
+            p {
+                z-index: 2;
+                font-size: 1em;
+                + p {
+                    overflow: hidden;
+                    text-indent: -999em;
+                }
+                &::before {
+                    text-indent: 0;
+                    float: right;
+                }
+                &[data-status=DELIVERED] {
+                    &::before {
+                        content: '📬';
+                    }
+                }
+                &[data-status=READ] {
+                    &::before {
+                        content: '📭';
+                    }
+                }
+                &:first-of-type { // Always the 'Posted On' text
+                    &::after {
+                        content: ' ';
+                        white-space: pre;
+                        width: 1em;
+                        position: absolute;
+                        bottom: 0;
+                        z-index: -1;
+                        right: 0;
+                        background-color: var(--chat-send);
+                    }
+                }
+                &:nth-last-child(n+2)::after, &:nth-last-child(n+2) ~ p::after { // Both P's IF there is at least 2
+                    left: 0;
+                    background-color: var(--chat-receive);
+                }
+            }
+            
+            // p:nth-last-child(n+2), p:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
+            //     &::after {
+            //         left: 0;
+            //         background-color: var(--chat-receive);
+            //     }
+            // }
         }
     }
 }
