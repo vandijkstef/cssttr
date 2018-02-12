@@ -1,6 +1,6 @@
 # CSS To the rescue
 This repo contains everything regarding CSS to the rescue.
-- [Styleguide | All components](styleguide.html)
+- [Styleguide All components](https://vandijkstef.github.io/cssttr/styleguide.html)
 
 ## Usage
 If you are on OSX and use Firefox, note you might need to change a keyboard settings. See the know issues for more information.

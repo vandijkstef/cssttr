@@ -6,9 +6,10 @@
     --chat-receive: #90CAF9;
 	--chat-send: #81C784;
 	--chat-bg: rgb(220,220,220);
-	--bg: #0A1612;
-	--accent: #76323F;
-	--text: #C5C1C0;
+	--bg: rgb(10, 22, 18);
+	--bg-fade: rgba(10, 22, 18, .7);
+	--accent: rgb(80, 17, 29);
+	--text: rgb(238, 238, 238);
 	--text-inactive: rgb(137, 137, 141);
 	--hide: rgba(0,0,0,0);
 	--show: rgba(0,0,0,1);
@@ -26,12 +27,6 @@ body {
 		margin: 1em 0;
 		padding: 0 1em;
 	}
-    // display: grid;
-    // grid-template-columns: 50% 50%;
-    // h1:first-child {
-    //     grid-column-start: 1;
-    //     grid-column-end: 3;
-    // }
 }
 
 img {
@@ -39,19 +34,13 @@ img {
     max-width: 100%;
 }
 
-p {
-    // max-width: 40em;
-}
-
 a {
 	color: var(--text);
 }
 
-// Focus stuffs
 *:focus {
-    // border-style: solid;
-    border-color: var(--focus, red);
-	outline-color: var(--focus, red);
+    border-color: var(--focus);
+	outline-color: var(--focus);
 }
 
 // Navigations
@@ -59,61 +48,57 @@ nav {
     ul, ol {
         list-style: none;
         padding: 0;
-		// display: flex;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(10em, 2fr));
 		grid-gap: .2em;
 		text-align: center;
-		// justify-content: space-around;
-		// flex-wrap: wrap;
+		margin: 0;
 		// Dropdown
         ul {
 			display: none;
 			width: 100%;
+			position: absolute;
         }
         li:hover, li:focus-within {
             position: relative;
             ul {
-                position: absolute;
 				display: block;
             }
         }
     }
     ol {
-        display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
-        text-align: center;
+		grid-template-columns: 25% 25% 25% 25%;
+		padding: 0 0 .5em;
     }
     progress {
         + ol {
-            color: var(--text-inactive);
+			color: var(--text-inactive);
         }
-    }
-}
-
-nav:first-of-type {
-	background-color: var(--accent);
-	h1 {
-		display: none;
 	}
-	li {
-		// background-color: rgba(219, 230, 73, 0.507);
-		// padding: .6em 4em;
-		// margin: 0 1em;
-		// text-align: center;
-		// width: 25%;
-		&:hover, &:focus-within, ul {
-			background-color: rgba(219, 230, 73, 1);
+	a {
+		text-decoration: none;
+		display: block;
+		width: 100%;
+		transition: var(--trans);
+		&:hover, &:focus {
+			background-color: rgba(255, 255, 255, .1);
+			outline: 0;
+		}
+	}
+	&:first-of-type {
+		background-color: var(--accent);
+		h1 {
+			display: none;
+		}
+		li ul {
+			background-color: var(--accent);
 		}
 		a {
-			color: var(--bg);
-			text-decoration: none;
-			display: block;
-			width: 100%;
 			padding: .5em 0;
 		}
 	}
 }
+
 
 // Progress bar
 progress {
@@ -123,9 +108,9 @@ progress {
 
 // Form related stuff
 form {
-    [autofocus] {
-        display: none; // TODO: Temp disable to kill autofocus
-    }
+    // [autofocus] {
+    	// display: none; // TODO: Temp disable to kill autofocus
+    // }
     label {
         flex-direction: row;
         justify-content: flex-start;
@@ -159,7 +144,7 @@ input, button {
 	padding: .2em;
     &:required {
 		color: blue;
-        // We cannot use after's on inputs
+        // We cannot use after's on inputs apparently
     }
 }
 
@@ -169,7 +154,8 @@ input {
 
 input[type=radio] {
     // Display none cancels the focus interactions
-    // The opacity hides it, in the CSS grid these fields are specified as having no size
+	// The opacity hides it, in the CSS grid these fields are specified as having no size
+	// This css should be more specific since we are hiding the radio fields
     opacity: 0;
     &:checked + label {
         svg {
@@ -179,16 +165,20 @@ input[type=radio] {
     }
 }
 
+input[type=checkbox] {
+	display: inline;
+}
+
 fieldset {
-	padding: 2em 0;
 	border: none;
     > div { // Added to support flex/grid view in a fieldset
+		padding: 1em 0;
         display: grid;
         grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
     }
     &:focus-within {
 		svg {
-			filter: grayscale(70%);
+			filter: grayscale(50%);
 		}
     }
 }
@@ -213,7 +203,8 @@ figure {
     // TODO: What if we only have one image?
     // Or a video?
     // TODO: Do we wanna overlay the title/text (on hover/focus)
-    margin: 0; // Let the figure take up all the space
+	margin: 0; // Let the figure take up all the space
+	position: relative;
     @media screen and (orientation: landscape){
         img:first-of-type {
             display: none;
@@ -226,6 +217,10 @@ figure {
         }
     }
     figcaption {
+		position: absolute;
+		bottom: 0;
+		padding: 1em;
+		background-color: var(--bg-fade);
         footer {
             font-style: italic;
             text-align: right;
