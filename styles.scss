@@ -15,18 +15,30 @@
 	--show: rgba(0,0,0,1);
 }
 
+@font-face {
+    font-family: Ampersand; 
+    src: local('Baskerville'), local('Goudy Old Style'), local('Palatino'), local('Book Antiqua');
+    unicode-range: U+26;
+}
+
 // Main stuffs
 body {
-    font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
+    font-family: Ampersand, Ubuntu, Calibri, Arial, Helvetica, sans-serif;
 	margin: 0;
 	font-size: 1.4em;
 	line-height: 1.4em;
 	color: var(--text);
-	background-color: var(--bg);
+    background-color: var(--bg);
+    transition: filter calc(var(--trans)*3) calc(var(--trans));
 	> h1 {
-		margin: 1em 0;
+        margin: 1em 0;
 		padding: 0 1em;
-	}
+    }
+    &.blurred {
+        > * {
+            filter: blur(10px);
+        }
+    }
 }
 
 img {
@@ -170,16 +182,37 @@ input[type=checkbox] {
 }
 
 fieldset {
-	border: none;
+    border: none;
+    filter: blur(0);
     > div { // Added to support flex/grid view in a fieldset
 		padding: 1em 0;
         display: grid;
         grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
     }
+    legend {
+        position: relative;
+    }
     &:focus-within {
+        position: relative;
+        z-index: 1;
+        filter: blur(0);
 		svg {
 			filter: grayscale(50%);
-		}
+        }
+        // De-emphasize by dimming
+        &::before {
+            background-color: rgba(0,0,0,.8);
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    &::before {
+        position: fixed;
+        content: ' ';
+        z-index: -1; // Without this line, the site isn't usable anymo'
+        transition: background-color var(--trans);
     }
 }
 
@@ -231,28 +264,26 @@ figure {
 // Chat
 #chat {
 	background-color: var(--chat-bg);
-	color: var(--bg);
+    color: var(--bg);
+    position: relative;
+    z-index: 0;
     ol {
         padding: 0;
         list-style: none;
         li {
-            background-color: var(--chat-send);
-            border-radius: 1em;
             padding: .5em 1em;
             margin-bottom: .8em;
             position: relative; // For the footer::after
+            // z-index: 1;
             p {
                 margin: 0;
-            }
-            &.send { // Use this only for the block level, not the chat-footer
-                background-color: var(--chat-receive);
             }
         }
         footer {
             display: flex;
             justify-content: space-between;
             p {
-                z-index: 2;
+                // z-index: 2;
                 font-size: .8em;
                 + p {
 					// Hide the text while still be able to show the icon
@@ -263,21 +294,31 @@ figure {
 					color: var(--show);
                 }
                 &:first-of-type { // Always the 'Posted On' text
-                    &::after { // Block corner fill
+                    &::before, &::after {
                         content: ' ';
-                        white-space: pre; // Force rendering of the space. This could also be solved by using a unicode character
-                        width: 1em;
                         position: absolute;
                         bottom: 0;
-                        z-index: -1;
                         right: 0;
+                        z-index: -1;
                         background-color: var(--chat-receive);
                     }
+                    &::before {
+                        top: 0;
+                        left: 0;
+                        border-radius: 1em;
+                    }
+                    &::after { // Block corner fill
+                        width: 1em;
+                    }
                 }
-                &:nth-last-child(n+2)::after, &:nth-last-child(n+2) ~ p::after { // Both P's IF there is at least 2
-					 // Block corner fill
-					left: 0;
-                    background-color: var(--chat-send);
+                &:nth-last-child(n+2), &:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
+                    // Block corner fill
+                    &::before, &::after {
+                        background-color: var(--chat-send);
+                    }
+                    &::after {
+                        left: 0;
+                    }
                 }
             }
         }

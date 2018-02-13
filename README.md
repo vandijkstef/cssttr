@@ -24,15 +24,21 @@ Explored CSS grid with CSSGridGarden, tried basic use of CSS variables with the 
 ## Thursday 8th of February 2018
 Decided to add a div to the fieldset to support grid styling. Discovered that checkboxes are not listening to styles as they should be. Also, input fields are not accepting ::after styles since they are not real 'containers'. Read and used quantity selector (styling by sibling count).
 
+## Tuesday 13th of February 2018
+Implemented Fancy ampersands. Implemented De-emphasize by dimming (ratings). Created de-emphasize by blurring, used a small piece of JS for this.
+
 # Future/Planning/Todo
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
-- [ ] Fancy ampersands
-- [ ] De-emphasize by dimming
-- [ ] De-emphasize by blurring
-- [ ] Intrinsic sizing
-- [ ] Vertical centering
-- [ ] Decide on advanced features
+- [ ] Chat before background styling
+- [ ] Intrinsic sizing (7.36)
+- [ ] Vertical centering (7.40)
+- [ ] Loading Spinner (8.43)
+- [ ] Extending the clickable area (6.30)
+- [ ] Custom Checkboxes (6.31)
+- [ ] (pseudo) Random background (2.7)
+- [ ] Validatie formulier?
 - [ ] Provide skip to content link on top of the page (with concern of any autofocus fields on the page)
+- [ ] Decide on advanced features
 
 # Sources
 

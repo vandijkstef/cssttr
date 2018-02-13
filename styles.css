@@ -15,18 +15,29 @@
   --show: black;
 }
 
+@font-face {
+  font-family: Ampersand;
+  src: local("Baskerville"), local("Goudy Old Style"), local("Palatino"), local("Book Antiqua");
+  unicode-range: U+26;
+}
+
 body {
-  font-family: Ubuntu, Calibri, Arial, Helvetica, sans-serif;
+  font-family: Ampersand, Ubuntu, Calibri, Arial, Helvetica, sans-serif;
   margin: 0;
   font-size: 1.4em;
   line-height: 1.4em;
   color: var(--text);
   background-color: var(--bg);
+  transition: filter calc(var(--trans)*3) calc(var(--trans));
 }
 
 body > h1 {
   margin: 1em 0;
   padding: 0 1em;
+}
+
+body.blurred > * {
+  filter: blur(10px);
 }
 
 img {
@@ -164,6 +175,7 @@ input[type=checkbox] {
 
 fieldset {
   border: none;
+  filter: blur(0);
 }
 
 fieldset > div {
@@ -172,8 +184,33 @@ fieldset > div {
   grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
 }
 
+fieldset legend {
+  position: relative;
+}
+
+fieldset:focus-within {
+  position: relative;
+  z-index: 1;
+  filter: blur(0);
+}
+
 fieldset:focus-within svg {
   filter: grayscale(50%);
+}
+
+fieldset:focus-within::before {
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+fieldset::before {
+  position: fixed;
+  content: ' ';
+  z-index: -1;
+  transition: background-color var(--trans);
 }
 
 legend {
@@ -222,6 +259,8 @@ figure figcaption footer {
 #chat {
   background-color: var(--chat-bg);
   color: var(--bg);
+  position: relative;
+  z-index: 0;
 }
 
 #chat ol {
@@ -230,8 +269,6 @@ figure figcaption footer {
 }
 
 #chat ol li {
-  background-color: var(--chat-send);
-  border-radius: 1em;
   padding: .5em 1em;
   margin-bottom: .8em;
   position: relative;
@@ -241,17 +278,12 @@ figure figcaption footer {
   margin: 0;
 }
 
-#chat ol li.send {
-  background-color: var(--chat-receive);
-}
-
 #chat ol footer {
   display: flex;
   justify-content: space-between;
 }
 
 #chat ol footer p {
-  z-index: 2;
   font-size: .8em;
 }
 
@@ -264,20 +296,31 @@ figure figcaption footer {
   color: var(--show);
 }
 
-#chat ol footer p:first-of-type::after {
+#chat ol footer p:first-of-type::before, #chat ol footer p:first-of-type::after {
   content: ' ';
-  white-space: pre;
-  width: 1em;
   position: absolute;
   bottom: 0;
-  z-index: -1;
   right: 0;
+  z-index: -1;
   background-color: var(--chat-receive);
+}
+
+#chat ol footer p:first-of-type::before {
+  top: 0;
+  left: 0;
+  border-radius: 1em;
+}
+
+#chat ol footer p:first-of-type::after {
+  width: 1em;
+}
+
+#chat ol footer p:nth-last-child(n+2)::before, #chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::before, #chat ol footer p:nth-last-child(n+2) ~ p::after {
+  background-color: var(--chat-send);
 }
 
 #chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::after {
   left: 0;
-  background-color: var(--chat-send);
 }
 
 [data-status=DELIVERED]::before {

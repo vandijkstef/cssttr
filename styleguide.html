@@ -8,7 +8,7 @@
     </head>
     <body>
 
-        <h1>Living Styleguide</h1>
+        <h1>Living &amp; Styleguide</h1>
 
         <!-- navigation.html -->
         <nav>
@@ -116,7 +116,8 @@
                     </footer>
                 </li>
                 <!-- Added send class to define messages that are send. This could be catched by the :has() selector that currently isn't implemented anywhere https://caniuse.com - Note this class is only used -->
-                <li class="changed send">
+                <li>
+                    <!-- TODO: Before background -->
                     <p>Hey! Sorry I was busy</p>
                     <footer> <!-- child-count selector -->
                         <p>Posted on <time datatime="2017-02-03T14:19">2:19 PM</time> by John</p>
@@ -141,5 +142,14 @@
 		// Log all changed HTML from the components
 		console.log('These are all changed elements');
 		console.log(document.querySelectorAll('.changed'));
+
+        // Small piece of JS to handle blur stuff
+        const fieldset = document.querySelector('body > fieldset');
+        fieldset.addEventListener('focusin', function() {
+            document.body.classList.add('blurred');
+        });
+        fieldset.addEventListener('focusout', function() {
+            document.body.classList.remove('blurred');
+        });
 	</script>
 </html>
