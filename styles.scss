@@ -1,6 +1,6 @@
 // Variables
 :root {
-    --focus: OliveDrab;
+    --focus: var(--chat-send);
     --required: '*';
     --trans: .2s;
     --chat-receive: #90CAF9;
@@ -28,7 +28,11 @@ body {
 	font-size: 1.4em;
 	line-height: 1.4em;
 	color: var(--text);
-    background-color: var(--bg);
+    background-color: var(--bg); 
+    background-image:
+        linear-gradient(90deg, rgb(80,80,80) 0, rgb(50,50,50) .6em, transparent 0),
+        linear-gradient(90deg, rgb(50,50,50) 2em, transparent 0);
+    background-size: 2em 40%, 2.7em 100%, 2em 100%;
     transition: filter calc(var(--trans)*3) calc(var(--trans));
 	> h1 {
         margin: 1em 0;
@@ -37,6 +41,18 @@ body {
     &.blurred {
         > * {
             filter: blur(10px);
+        }
+    }
+    > div:first-of-type {
+        position: absolute;
+        top: -3em;
+        width: 100%;
+        background-color: var(--bg);
+        text-align: center;
+        padding: .5em 0;
+        transition: var(--trans);
+        &:focus-within{
+            top: 0;
         }
     }
 }
@@ -113,19 +129,44 @@ nav {
 
 
 // Progress bar
-progress {
-    // TODO: Anim
-    width: 100%;
-}
+// progress {
+//     // TODO: Anim
+//     &[value] {
+//         &::-webkit-progress-value, &::-moz-progress-bar { background: red; }
+//         &::-webkit-progress-bar {
+//             background: pink;
+//         }
+//     }
+//     width: 100%;
+// }
 
+progress[value] {
+    overflow: hidden;
+    height: 1em;
+    -webkit-appearance: none;
+    display: block;
+    width: 100%;
+    &::-webkit-progress-bar { // The full bar
+        // background-color: yellow;
+    }
+    &::-webkit-progress-value { // The value
+        background-color: var(--chat-send);
+    }
+}
 // Form related stuff
 form {
     // [autofocus] {
-    	// display: none; // TODO: Temp disable to kill autofocus
+    // 	display: none; // TODO: Temp disable to kill autofocus
     // }
     label {
         flex-direction: row;
         justify-content: flex-start;
+    }
+    & > a {
+        display: inline-block;
+    }
+    &:valid {
+        background-color: var(--chat-send);
     }
 }
 
@@ -133,7 +174,6 @@ fieldset label {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-end;
 	position: relative;
 	color: var(--hide);
     svg {
@@ -144,7 +184,7 @@ fieldset label {
         filter: grayscale(100%);
 		cursor: pointer;
 		position: absolute;
-		bottom: 0;
+        bottom: 0;
     }
 }
 
@@ -153,10 +193,40 @@ input, button {
     font-size: 1.1em;
     margin-bottom: 1em;
 	margin-top: .5em;
-	padding: .2em;
-    &:required {
-		color: blue;
-        // We cannot use after's on inputs apparently
+    padding: .2em;
+    border: 3px solid gray;
+    &:invalid {
+        border-color: red;
+    }
+    &:placeholder-shown {
+        border-color: orange;
+    }
+    &:valid {
+        border-color: var(--chat-send);
+    }
+    &[type=submit] {
+        position: relative;
+        margin: 1.2em 0;
+        &::before {
+            content: ' ';
+            position: absolute;
+            top: -1em;
+            bottom: -1em;
+            left: -1em;
+            right: -1em;
+        }
+        // This should start working with focus visible.
+        // Unfortunately the focus event fires before the click thus the button is focused on the larger size, but never actually pressed
+        // &:focus {
+        //     outline-color: red;
+        //     padding: -1em;
+        //     &::before {
+        //         top: 0;
+        //         bottom: 0;
+        //         left: 0;
+        //         right: 0;
+        //     }
+        // }
     }
 }
 
@@ -178,7 +248,40 @@ input[type=radio] {
 }
 
 input[type=checkbox] {
-	display: inline;
+    position: absolute;
+    clip: rect(0,0,0,0);
+    + label {
+        display: inline-block;
+        border-radius: .2em;
+        cursor: pointer;
+        &::before {
+            content: '';
+            transition: var(--trans);
+            display: inline-block;
+            vertical-align: -.15em;
+            width: 1em;
+            height: 1em;
+            margin-right: .4em;
+            border-radius: .2em;
+            background-color: var(--chat-receive);
+            text-indent: .15em;
+            line-height: .65;
+            box-shadow: 1px 1px 1px rgba(0,0,0,1);
+        }
+    }
+    &:checked {
+        + label {
+            &::before {
+                background-color: var(--chat-send);
+                box-shadow: 1px 1px 1px inset;
+            }
+        }
+    }
+    &:focus {
+        + label {
+            outline: auto 5px var(--focus);
+        }
+    }
 }
 
 fieldset {
@@ -236,23 +339,25 @@ figure {
     // TODO: What if we only have one image?
     // Or a video?
     // TODO: Do we wanna overlay the title/text (on hover/focus)
-	margin: 0; // Let the figure take up all the space
-	position: relative;
+	// margin: 0; // Let the figure take up all the space
+    position: relative;
+    margin: 0;
     @media screen and (orientation: landscape){
         img:first-of-type {
             display: none;
         }
     }
     @media screen and (orientation: portrait){
-        // img:last-of-type {
         img:nth-of-type(2) {
             display: none;
         }
     }
     figcaption {
-		position: absolute;
-		bottom: 0;
-		padding: 1em;
+        @media (min-width: 40em) {
+            position: absolute;
+            bottom: .3em;
+            padding: 1em;
+        }
 		background-color: var(--bg-fade);
         footer {
             font-style: italic;
@@ -274,7 +379,6 @@ figure {
             padding: .5em 1em;
             margin-bottom: .8em;
             position: relative; // For the footer::after
-            // z-index: 1;
             p {
                 margin: 0;
             }
@@ -283,7 +387,6 @@ figure {
             display: flex;
             justify-content: space-between;
             p {
-                // z-index: 2;
                 font-size: .8em;
                 + p {
 					// Hide the text while still be able to show the icon
@@ -323,6 +426,32 @@ figure {
             }
         }
     }
+    form {  
+        &:valid {
+            background-color: var(--chat-bg);
+        }
+        label {
+            position: absolute;
+            clip: rect(0,0,0,0);
+        }
+        display: grid;
+        grid-template-columns: 9fr 1fr;
+        textarea, button {
+            border: 0;
+        }
+        textarea {
+            font-size: 1.4em;
+            box-sizing: border-box;
+            width: 100%;
+            border-radius: 1em 0 0 1em;
+            padding: 1em 0 1em 1em;
+        }
+        button {
+            border-radius: 0 1em 1em 0;
+            margin: 0;
+            margin-bottom: .25em;
+        }
+    }
 }
 
 // Define icons
@@ -335,4 +464,30 @@ figure {
 	&::before {
 		content: '📭';
 	}
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+    span {
+        opacity: 0;
+        height: 0;
+        float: left;
+    }
+    #spinnergroup {
+        transform-origin: center;
+        animation: spinnersvg .5s infinite steps(8);
+    }
+    &.png {
+        background: url(img/loader.png) 0 0;
+        animation: spinnerpng .5s infinite steps(8);
+    }
+}
+
+@keyframes spinnersvg {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes spinnerpng {
+    to { background-position: -800px 0; }
 }

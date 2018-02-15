@@ -25,20 +25,21 @@ Explored CSS grid with CSSGridGarden, tried basic use of CSS variables with the 
 Decided to add a div to the fieldset to support grid styling. Discovered that checkboxes are not listening to styles as they should be. Also, input fields are not accepting ::after styles since they are not real 'containers'. Read and used quantity selector (styling by sibling count).
 
 ## Tuesday 13th of February 2018
-Implemented Fancy ampersands. Implemented De-emphasize by dimming (ratings). Created de-emphasize by blurring, used a small piece of JS for this.
+Implemented Fancy ampersands. Implemented De-emphasize by dimming (ratings). Created de-emphasize by blurring, used a small piece of JS for this. Updated the chat and removed a previously added class. Background are now based on the ::before. Extended the clickable area of the button, but cannot downsize focus afterwards since the focus event is fired before any click event has a chance to fire. Played a little bit with the random background pattern, don't fully understand just yet, to be continued...
+
+## Thursday 15th of February 2018
+Added custom checkbox. Added loading spinner using the PNG sprite technique, but also using an animated SVG. Played a little more with the random background pattern. Added skip to content link on top of the page. Used a CSS grid to style the chat form, found that textareas dont like to be directly in a grid. Started work on form states, mainly for the input fields. Empty fields shouldn't be invalid, and can be styled using :placeholder-shown, if there is an actual placeholder set, at minumum with a space.
 
 # Future/Planning/Todo
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
-- [ ] Chat before background styling
-- [ ] Intrinsic sizing (7.36)
+- [ ] Validation formulier (voor <form> zelf)
+- [ ] Rework the components into a site that makes sense
+
+# Side-ish
 - [ ] Vertical centering (7.40)
-- [ ] Loading Spinner (8.43)
-- [ ] Extending the clickable area (6.30)
-- [ ] Custom Checkboxes (6.31)
-- [ ] (pseudo) Random background (2.7)
-- [ ] Validatie formulier?
-- [ ] Provide skip to content link on top of the page (with concern of any autofocus fields on the page)
-- [ ] Decide on advanced features
+
+# Question
+- [ ] Intrinsic sizing (7.36)
 
 # Sources
 

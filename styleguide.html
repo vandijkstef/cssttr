@@ -5,9 +5,10 @@
         <meta name="viewport" content="width=device-width">
         <title>Living Styleguide</title>
         <link rel="stylesheet" href="styles.css">
+        <!-- <link rel="stylesheet" href="REVENGE.CSS/revenge.css"> -->
     </head>
     <body>
-
+        <div><a href="#main">Skip to content</a></div>
         <h1>Living &amp; Styleguide</h1>
 
         <!-- navigation.html -->
@@ -41,11 +42,12 @@
         </nav>
 
         <!-- login.html -->
-        <form action="/" method="post">
+        <!-- Added placeholders to form fields -->
+        <form action="/" method="post" class="changed">
             <label for="field-email">Email</label>
-            <input type="email" id="field-email" name="field-email" autocomplete="email" required autofocus>
+            <input class="changed" type="email" id="field-email" name="field-email" placeholder=" " autocomplete="email" required autofocus>
             <label for="field-password">Password</label>
-            <input type="password" id="field-password" name="field-password" required>
+            <input type="password" id="field-password" placeholder=" " name="field-password" required>
             <input type="checkbox" id="field-stay-logged-in" name="field-stay-logged-in" value="stay-logged-in">
             <label for="field-stay-logged-in">Stay logged in</label>
             <a href="/">Forgot password</a>
@@ -81,7 +83,8 @@
         </fieldset>
 
         <!-- picture-with-subtitle.html -->
-        <article>
+        <!-- Providing main ID for the skip to content link -->
+        <article id="main">
             <h1>This picture has a title</h1>
             <figure>
                 <!-- Portrait -->
@@ -133,10 +136,47 @@
             </ol>
             <form action="/" method="post">
                 <label for="field-message">Message</label>
-                <textarea name="field-message" id="field-message"></textarea>
+                <!-- Wrapped the text area in a div since it otherwise resizes on input since its in a grid -->
+                <div class="changed">
+                    <textarea name="field-message" id="field-message"></textarea>
+                </div>
                 <button type="submit">Send</button>
             </form>
         </section>
+        <div class="loader png">
+            <span>Loading...</span>
+        </div>
+        <div class="loader svg">
+            <span>Loading...</span>
+            <svg id="svgspinner" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <defs>
+                    <style>
+                    .cls-1{fill:#231f20;}
+                    .cls-1,.cls-3{opacity:0.4;}
+                    .cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9{fill:#fff;}
+                    .cls-2{opacity:0.8;}
+                    .cls-4{opacity:0.6;}
+                    .cls-5{opacity:0.2;}
+                    .cls-6{opacity:0.7;}
+                    .cls-7{opacity:0.3;}
+                    .cls-8{opacity:0.5;}
+                    .cls-9{opacity:0.1;}
+                    </style>
+                </defs>
+                <title>svgspinner</title>
+                <rect id="bg" class="cls-1" width="100" height="100" rx="13" ry="13"/>
+                <g id="spinnergroup">
+                    <rect class="cls-2" x="45.5" y="6.5" width="9" height="34" rx="4.41" ry="4.41"/>
+                    <rect class="cls-3" x="45.5" y="59.5" width="9" height="34" rx="4.41" ry="4.41" transform="translate(100 153) rotate(180)"/>
+                    <rect class="cls-4" x="72" y="33" width="9" height="34" rx="4.41" ry="4.41" transform="translate(126.5 -26.5) rotate(90)"/>
+                    <rect class="cls-5" x="19" y="33" width="9" height="34" rx="4.41" ry="4.41" transform="translate(-26.5 73.5) rotate(-90)"/>
+                    <rect class="cls-6" x="64.24" y="14.26" width="9" height="34" rx="4.41" ry="4.41" transform="translate(42.24 -39.45) rotate(45)"/>
+                    <rect class="cls-7" x="26.76" y="51.74" width="9" height="34" rx="4.41" ry="4.41" transform="translate(4.76 139.45) rotate(-135)"/>
+                    <rect class="cls-8" x="64.24" y="51.74" width="9" height="34" rx="4.41" ry="4.41" transform="translate(165.95 68.74) rotate(135)"/>
+                    <rect class="cls-9" x="26.76" y="14.26" width="9" height="34" rx="4.41" ry="4.41" transform="translate(-12.95 31.26) rotate(-45)"/>
+                </g>
+            </svg>
+        </div>
 	</body>
 	<script>
 		// Log all changed HTML from the components
@@ -151,5 +191,5 @@
         fieldset.addEventListener('focusout', function() {
             document.body.classList.remove('blurred');
         });
-	</script>
+    </script>
 </html>

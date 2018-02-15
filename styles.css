@@ -1,6 +1,6 @@
 @charset "UTF-8";
 :root {
-  --focus: OliveDrab;
+  --focus: var(--chat-send);
   --required: '*';
   --trans: .2s;
   --chat-receive: #90CAF9;
@@ -28,6 +28,8 @@ body {
   line-height: 1.4em;
   color: var(--text);
   background-color: var(--bg);
+  background-image: linear-gradient(90deg, #505050 0, #323232 0.6em, transparent 0), linear-gradient(90deg, #323232 2em, transparent 0);
+  background-size: 2em 40%, 2.7em 100%, 2em 100%;
   transition: filter calc(var(--trans)*3) calc(var(--trans));
 }
 
@@ -38,6 +40,20 @@ body > h1 {
 
 body.blurred > * {
   filter: blur(10px);
+}
+
+body > div:first-of-type {
+  position: absolute;
+  top: -3em;
+  width: 100%;
+  background-color: var(--bg);
+  text-align: center;
+  padding: .5em 0;
+  transition: var(--trans);
+}
+
+body > div:first-of-type:focus-within {
+  top: 0;
 }
 
 img {
@@ -115,8 +131,16 @@ nav:first-of-type a {
   padding: .5em 0;
 }
 
-progress {
+progress[value] {
+  overflow: hidden;
+  height: 1em;
+  -webkit-appearance: none;
+  display: block;
   width: 100%;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: var(--chat-send);
 }
 
 form label {
@@ -124,11 +148,18 @@ form label {
   justify-content: flex-start;
 }
 
+form > a {
+  display: inline-block;
+}
+
+form:valid {
+  background-color: var(--chat-send);
+}
+
 fieldset label {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: flex-end;
   position: relative;
   color: var(--hide);
 }
@@ -150,10 +181,33 @@ input, button {
   margin-bottom: 1em;
   margin-top: .5em;
   padding: .2em;
+  border: 3px solid gray;
 }
 
-input:required, button:required {
-  color: blue;
+input:invalid, button:invalid {
+  border-color: red;
+}
+
+input:placeholder-shown, button:placeholder-shown {
+  border-color: orange;
+}
+
+input:valid, button:valid {
+  border-color: var(--chat-send);
+}
+
+input[type=submit], button[type=submit] {
+  position: relative;
+  margin: 1.2em 0;
+}
+
+input[type=submit]::before, button[type=submit]::before {
+  content: ' ';
+  position: absolute;
+  top: -1em;
+  bottom: -1em;
+  left: -1em;
+  right: -1em;
 }
 
 input {
@@ -170,7 +224,38 @@ input[type=radio]:checked + label svg {
 }
 
 input[type=checkbox] {
-  display: inline;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: .2em;
+  cursor: pointer;
+}
+
+input[type=checkbox] + label::before {
+  content: '';
+  transition: var(--trans);
+  display: inline-block;
+  vertical-align: -.15em;
+  width: 1em;
+  height: 1em;
+  margin-right: .4em;
+  border-radius: .2em;
+  background-color: var(--chat-receive);
+  text-indent: .15em;
+  line-height: .65;
+  box-shadow: 1px 1px 1px black;
+}
+
+input[type=checkbox]:checked + label::before {
+  background-color: var(--chat-send);
+  box-shadow: 1px 1px 1px inset;
+}
+
+input[type=checkbox]:focus + label {
+  outline: auto 5px var(--focus);
 }
 
 fieldset {
@@ -228,8 +313,8 @@ article, #chat > *, form, fieldset, nav:nth-of-type(2) {
 }
 
 figure {
-  margin: 0;
   position: relative;
+  margin: 0;
 }
 
 @media screen and (orientation: landscape) {
@@ -245,10 +330,15 @@ figure {
 }
 
 figure figcaption {
-  position: absolute;
-  bottom: 0;
-  padding: 1em;
   background-color: var(--bg-fade);
+}
+
+@media (min-width: 40em) {
+  figure figcaption {
+    position: absolute;
+    bottom: .3em;
+    padding: 1em;
+  }
 }
 
 figure figcaption footer {
@@ -323,10 +413,75 @@ figure figcaption footer {
   left: 0;
 }
 
+#chat form {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+
+#chat form:valid {
+  background-color: var(--chat-bg);
+}
+
+#chat form label {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+#chat form textarea, #chat form button {
+  border: 0;
+}
+
+#chat form textarea {
+  font-size: 1.4em;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 1em 0 0 1em;
+  padding: 1em 0 1em 1em;
+}
+
+#chat form button {
+  border-radius: 0 1em 1em 0;
+  margin: 0;
+  margin-bottom: .25em;
+}
+
 [data-status=DELIVERED]::before {
   content: '📬';
 }
 
 [data-status=READ]::before {
   content: '📭';
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+}
+
+.loader span {
+  opacity: 0;
+  height: 0;
+  float: left;
+}
+
+.loader #spinnergroup {
+  transform-origin: center;
+  animation: spinnersvg 0.5s infinite steps(8);
+}
+
+.loader.png {
+  background: url(img/loader.png) 0 0;
+  animation: spinnerpng 0.5s infinite steps(8);
+}
+
+@keyframes spinnersvg {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spinnerpng {
+  to {
+    background-position: -800px 0;
+  }
 }
