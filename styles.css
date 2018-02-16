@@ -131,15 +131,15 @@ nav:first-of-type a {
   padding: .5em 0;
 }
 
-progress[value] {
+progress {
+  -webkit-appearance: none;
   overflow: hidden;
   height: 1em;
-  -webkit-appearance: none;
   display: block;
   width: 100%;
 }
 
-progress[value]::-webkit-progress-value {
+progress::-webkit-progress-value {
   background-color: var(--chat-send);
 }
 

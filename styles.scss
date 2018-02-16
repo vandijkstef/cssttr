@@ -140,10 +140,10 @@ nav {
 //     width: 100%;
 // }
 
-progress[value] {
+progress {
+	-webkit-appearance: none;
 	overflow: hidden;
 	height: 1em;
-	-webkit-appearance: none;
 	display: block;
 	width: 100%;
 	&::-webkit-progress-bar { // The full bar
