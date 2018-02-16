@@ -177,19 +177,19 @@
                 </g>
             </svg>
         </div>
+        <script>
+            // Log all changed HTML from the components
+            console.log('These are all changed elements');
+            console.log(document.querySelectorAll('.changed'));
+    
+            // Small piece of JS to handle blur stuff
+            const fieldset = document.querySelector('body > fieldset');
+            fieldset.addEventListener('focusin', function() {
+                document.body.classList.add('blurred');
+            });
+            fieldset.addEventListener('focusout', function() {
+                document.body.classList.remove('blurred');
+            });
+        </script>
 	</body>
-	<script>
-		// Log all changed HTML from the components
-		console.log('These are all changed elements');
-		console.log(document.querySelectorAll('.changed'));
-
-        // Small piece of JS to handle blur stuff
-        const fieldset = document.querySelector('body > fieldset');
-        fieldset.addEventListener('focusin', function() {
-            document.body.classList.add('blurred');
-        });
-        fieldset.addEventListener('focusout', function() {
-            document.body.classList.remove('blurred');
-        });
-    </script>
 </html>
