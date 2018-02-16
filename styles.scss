@@ -95,7 +95,7 @@ nav {
 		}
 	}
 	ol {
-		grid-template-columns: 25% 25% 25% 25%;
+		grid-template-columns: repeat(4, 25%);
 		padding: 0 0 .5em;
 	}
 	progress {
@@ -290,7 +290,7 @@ fieldset {
 	> div { // Added to support flex/grid view in a fieldset
 		padding: 1em 0;
 		display: grid;
-		grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
+		grid-template-columns: repeat(4, 0 25%);
 	}
 	legend {
 		position: relative;
