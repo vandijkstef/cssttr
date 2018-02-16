@@ -1,9 +1,9 @@
 // Variables
 :root {
-    --focus: var(--chat-send);
-    --required: '*';
-    --trans: .2s;
-    --chat-receive: #90CAF9;
+	--focus: var(--chat-send);
+	--required: '*';
+	--trans: .2s;
+	--chat-receive: #90CAF9;
 	--chat-send: #81C784;
 	--chat-bg: rgb(220,220,220);
 	--bg: rgb(10, 22, 18);
@@ -16,50 +16,50 @@
 }
 
 @font-face {
-    font-family: Ampersand; 
-    src: local('Baskerville'), local('Goudy Old Style'), local('Palatino'), local('Book Antiqua');
-    unicode-range: U+26;
+	font-family: Ampersand; 
+	src: local('Baskerville'), local('Goudy Old Style'), local('Palatino'), local('Book Antiqua');
+	unicode-range: U+26;
 }
 
 // Main stuffs
 body {
-    font-family: Ampersand, Ubuntu, Calibri, Arial, Helvetica, sans-serif;
+	font-family: Ampersand, Ubuntu, Calibri, Arial, Helvetica, sans-serif;
 	margin: 0;
 	font-size: 1.4em;
 	line-height: 1.4em;
 	color: var(--text);
-    background-color: var(--bg); 
-    background-image:
-        linear-gradient(90deg, rgb(80,80,80) 0, rgb(50,50,50) .6em, transparent 0),
-        linear-gradient(90deg, rgb(50,50,50) 2em, transparent 0);
-    background-size: 2em 40%, 2.7em 100%, 2em 100%;
-    transition: filter calc(var(--trans)*3) calc(var(--trans));
+	background-color: var(--bg); 
+	background-image:
+		linear-gradient(90deg, rgb(80,80,80) 0, rgb(50,50,50) .6em, transparent 0),
+		linear-gradient(90deg, rgb(50,50,50) 2em, transparent 0);
+	background-size: 2em 40%, 2.7em 100%, 2em 100%;
+	transition: filter calc(var(--trans)*3) calc(var(--trans));
 	> h1 {
-        margin: 1em 0;
+		margin: 1em 0;
 		padding: 0 1em;
-    }
-    &.blurred {
-        > * {
-            filter: blur(10px);
-        }
-    }
-    > div:first-of-type {
-        position: absolute;
-        top: -3em;
-        width: 100%;
-        background-color: var(--bg);
-        text-align: center;
-        padding: .5em 0;
-        transition: var(--trans);
-        &:focus-within{
-            top: 0;
-        }
-    }
+	}
+	&.blurred {
+		> * {
+			filter: blur(10px);
+		}
+	}
+	> div:first-of-type {
+		position: absolute;
+		top: -3em;
+		width: 100%;
+		background-color: var(--bg);
+		text-align: center;
+		padding: .5em 0;
+		transition: var(--trans);
+		&:focus-within{
+			top: 0;
+		}
+	}
 }
 
 img {
-    min-width: 100%;
-    max-width: 100%;
+	min-width: 100%;
+	max-width: 100%;
 }
 
 a {
@@ -67,41 +67,41 @@ a {
 }
 
 *:focus {
-    border-color: var(--focus);
+	border-color: var(--focus);
 	outline-color: var(--focus);
 }
 
 // Navigations
 nav {
-    ul, ol {
-        list-style: none;
-        padding: 0;
+	ul, ol {
+		list-style: none;
+		padding: 0;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(10em, 2fr));
 		grid-gap: .2em;
 		text-align: center;
 		margin: 0;
 		// Dropdown
-        ul {
+		ul {
 			display: none;
 			width: 100%;
 			position: absolute;
-        }
-        li:hover, li:focus-within {
-            position: relative;
-            ul {
+		}
+		li:hover, li:focus-within {
+			position: relative;
+			ul {
 				display: block;
-            }
-        }
-    }
-    ol {
+			}
+		}
+	}
+	ol {
 		grid-template-columns: 25% 25% 25% 25%;
 		padding: 0 0 .5em;
-    }
-    progress {
-        + ol {
+	}
+	progress {
+		+ ol {
 			color: var(--text-inactive);
-        }
+		}
 	}
 	a {
 		text-decoration: none;
@@ -141,93 +141,93 @@ nav {
 // }
 
 progress[value] {
-    overflow: hidden;
-    height: 1em;
-    -webkit-appearance: none;
-    display: block;
-    width: 100%;
-    &::-webkit-progress-bar { // The full bar
-        // background-color: yellow;
-    }
-    &::-webkit-progress-value { // The value
-        background-color: var(--chat-send);
-    }
+	overflow: hidden;
+	height: 1em;
+	-webkit-appearance: none;
+	display: block;
+	width: 100%;
+	&::-webkit-progress-bar { // The full bar
+		// background-color: yellow;
+	}
+	&::-webkit-progress-value { // The value
+		background-color: var(--chat-send);
+	}
 }
 // Form related stuff
 form {
-    // [autofocus] {
-    // 	display: none; // TODO: Temp disable to kill autofocus
-    // }
-    label {
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-    & > a {
-        display: inline-block;
-    }
-    &:valid {
-        background-color: var(--chat-send);
-    }
+	// [autofocus] {
+	// 	display: none; // TODO: Temp disable to kill autofocus
+	// }
+	label {
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	& > a {
+		display: inline-block;
+	}
+	&:valid {
+		background-color: var(--chat-send);
+	}
 }
 
 fieldset label {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 	position: relative;
 	color: var(--hide);
-    svg {
-        order: -1;
-        width: 2em;
-        height: 2em;
-        transition: calc(var(--trans) * 2);
-        filter: grayscale(100%);
+	svg {
+		order: -1;
+		width: 2em;
+		height: 2em;
+		transition: calc(var(--trans) * 2);
+		filter: grayscale(100%);
 		cursor: pointer;
 		position: absolute;
-        bottom: 0;
-    }
+		bottom: 0;
+	}
 }
 
 input, button {
-    display: block;
-    font-size: 1.1em;
-    margin-bottom: 1em;
+	display: block;
+	font-size: 1.1em;
+	margin-bottom: 1em;
 	margin-top: .5em;
-    padding: .2em;
-    border: 3px solid gray;
-    &:invalid {
-        border-color: red;
-    }
-    &:placeholder-shown {
-        border-color: orange;
-    }
-    &:valid {
-        border-color: var(--chat-send);
-    }
-    &[type=submit] {
-        position: relative;
-        margin: 1.2em 0;
-        &::before {
-            content: ' ';
-            position: absolute;
-            top: -1em;
-            bottom: -1em;
-            left: -1em;
-            right: -1em;
-        }
-        // This should start working with focus visible.
-        // Unfortunately the focus event fires before the click thus the button is focused on the larger size, but never actually pressed
-        // &:focus {
-        //     outline-color: red;
-        //     padding: -1em;
-        //     &::before {
-        //         top: 0;
-        //         bottom: 0;
-        //         left: 0;
-        //         right: 0;
-        //     }
-        // }
-    }
+	padding: .2em;
+	border: 3px solid gray;
+	&:invalid {
+		border-color: red;
+	}
+	&:placeholder-shown {
+		border-color: orange;
+	}
+	&:valid {
+		border-color: var(--chat-send);
+	}
+	&[type=submit] {
+		position: relative;
+		margin: 1.2em 0;
+		&::before {
+			content: ' ';
+			position: absolute;
+			top: -1em;
+			bottom: -1em;
+			left: -1em;
+			right: -1em;
+		}
+		// This should start working with focus visible.
+		// Unfortunately the focus event fires before the click thus the button is focused on the larger size, but never actually pressed
+		// &:focus {
+		//     outline-color: red;
+		//     padding: -1em;
+		//     &::before {
+		//         top: 0;
+		//         bottom: 0;
+		//         left: 0;
+		//         right: 0;
+		//     }
+		// }
+	}
 }
 
 input {
@@ -235,88 +235,88 @@ input {
 }
 
 input[type=radio] {
-    // Display none cancels the focus interactions
+	// Display none cancels the focus interactions
 	// The opacity hides it, in the CSS grid these fields are specified as having no size
 	// This css should be more specific since we are hiding the radio fields
-    opacity: 0;
-    &:checked + label {
-        svg {
+	opacity: 0;
+	&:checked + label {
+		svg {
 			filter: grayscale(0);
 			transform: scale(1.5);
-        }
-    }
+		}
+	}
 }
 
 input[type=checkbox] {
-    position: absolute;
-    clip: rect(0,0,0,0);
-    + label {
-        display: inline-block;
-        border-radius: .2em;
-        cursor: pointer;
-        &::before {
-            content: '';
-            transition: var(--trans);
-            display: inline-block;
-            vertical-align: -.15em;
-            width: 1em;
-            height: 1em;
-            margin-right: .4em;
-            border-radius: .2em;
-            background-color: var(--chat-receive);
-            text-indent: .15em;
-            line-height: .65;
-            box-shadow: 1px 1px 1px rgba(0,0,0,1);
-        }
-    }
-    &:checked {
-        + label {
-            &::before {
-                background-color: var(--chat-send);
-                box-shadow: 1px 1px 1px inset;
-            }
-        }
-    }
-    &:focus {
-        + label {
-            outline: auto 5px var(--focus);
-        }
-    }
+	position: absolute;
+	clip: rect(0,0,0,0);
+	+ label {
+		display: inline-block;
+		border-radius: .2em;
+		cursor: pointer;
+		&::before {
+			content: '';
+			transition: var(--trans);
+			display: inline-block;
+			vertical-align: -.15em;
+			width: 1em;
+			height: 1em;
+			margin-right: .4em;
+			border-radius: .2em;
+			background-color: var(--chat-receive);
+			text-indent: .15em;
+			line-height: .65;
+			box-shadow: 1px 1px 1px rgba(0,0,0,1);
+		}
+	}
+	&:checked {
+		+ label {
+			&::before {
+				background-color: var(--chat-send);
+				box-shadow: 1px 1px 1px inset;
+			}
+		}
+	}
+	&:focus {
+		+ label {
+			outline: auto 5px var(--focus);
+		}
+	}
 }
 
 fieldset {
-    border: none;
-    filter: blur(0);
-    > div { // Added to support flex/grid view in a fieldset
+	border: none;
+	filter: blur(0);
+	> div { // Added to support flex/grid view in a fieldset
 		padding: 1em 0;
-        display: grid;
-        grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
-    }
-    legend {
-        position: relative;
-    }
-    &:focus-within {
-        position: relative;
-        z-index: 1;
-        filter: blur(0);
+		display: grid;
+		grid-template-columns: 0 25% 0 25% 0 25% 0 25%;
+	}
+	legend {
+		position: relative;
+	}
+	&:focus-within {
+		position: relative;
+		z-index: 1;
+		filter: blur(0);
 		svg {
 			filter: grayscale(50%);
-        }
-        // De-emphasize by dimming
-        &::before {
-            background-color: rgba(0,0,0,.8);
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-    }
-    &::before {
-        position: fixed;
-        content: ' ';
-        z-index: -1; // Without this line, the site isn't usable anymo'
-        transition: background-color var(--trans);
-    }
+		}
+		// De-emphasize by dimming
+		&::before {
+			background-color: rgba(0,0,0,.8);
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+	}
+	&::before {
+		position: fixed;
+		content: ' ';
+		z-index: -1; // Without this line, the site isn't usable anymo'
+		transition: background-color var(--trans);
+	}
 }
 
 legend {
@@ -336,122 +336,122 @@ article, #chat > *, form, fieldset, nav:nth-of-type(2) {
 
 // Figure display
 figure {
-    // TODO: What if we only have one image?
-    // Or a video?
-    // TODO: Do we wanna overlay the title/text (on hover/focus)
+	// TODO: What if we only have one image?
+	// Or a video?
+	// TODO: Do we wanna overlay the title/text (on hover/focus)
 	// margin: 0; // Let the figure take up all the space
-    position: relative;
-    margin: 0;
-    @media screen and (orientation: landscape){
-        img:first-of-type {
-            display: none;
-        }
-    }
-    @media screen and (orientation: portrait){
-        img:nth-of-type(2) {
-            display: none;
-        }
-    }
-    figcaption {
-        @media (min-width: 40em) {
-            position: absolute;
-            bottom: .3em;
-            padding: 1em;
-        }
+	position: relative;
+	margin: 0;
+	@media screen and (orientation: landscape){
+		img:first-of-type {
+			display: none;
+		}
+	}
+	@media screen and (orientation: portrait){
+		img:nth-of-type(2) {
+			display: none;
+		}
+	}
+	figcaption {
+		@media (min-width: 40em) {
+			position: absolute;
+			bottom: .3em;
+			padding: 1em;
+		}
 		background-color: var(--bg-fade);
-        footer {
-            font-style: italic;
-            text-align: right;
-        }
-    }
+		footer {
+			font-style: italic;
+			text-align: right;
+		}
+	}
 }
 
 // Chat
 #chat {
 	background-color: var(--chat-bg);
-    color: var(--bg);
-    position: relative;
-    z-index: 0;
-    ol {
-        padding: 0;
-        list-style: none;
-        li {
-            padding: .5em 1em;
-            margin-bottom: .8em;
-            position: relative; // For the footer::after
-            p {
-                margin: 0;
-            }
-        }
-        footer {
-            display: flex;
-            justify-content: space-between;
-            p {
-                font-size: .8em;
-                + p {
+	color: var(--bg);
+	position: relative;
+	z-index: 0;
+	ol {
+		padding: 0;
+		list-style: none;
+		li {
+			padding: .5em 1em;
+			margin-bottom: .8em;
+			position: relative; // For the footer::after
+			p {
+				margin: 0;
+			}
+		}
+		footer {
+			display: flex;
+			justify-content: space-between;
+			p {
+				font-size: .8em;
+				+ p {
 					// Hide the text while still be able to show the icon
 					color: var(--hide);
-                }
-                &::before {
+				}
+				&::before {
 					float: right;
 					color: var(--show);
-                }
-                &:first-of-type { // Always the 'Posted On' text
-                    &::before, &::after {
-                        content: ' ';
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        z-index: -1;
-                        background-color: var(--chat-receive);
-                    }
-                    &::before {
-                        top: 0;
-                        left: 0;
-                        border-radius: 1em;
-                    }
-                    &::after { // Block corner fill
-                        width: 1em;
-                    }
-                }
-                &:nth-last-child(n+2), &:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
-                    // Block corner fill
-                    &::before, &::after {
-                        background-color: var(--chat-send);
-                    }
-                    &::after {
-                        left: 0;
-                    }
-                }
-            }
-        }
-    }
-    form {  
-        &:valid {
-            background-color: var(--chat-bg);
-        }
-        label {
-            position: absolute;
-            clip: rect(0,0,0,0);
-        }
-        display: grid;
-        grid-template-columns: 9fr 1fr;
-        textarea, button {
-            border: 0;
-        }
-        textarea {
-            font-size: 1.4em;
-            box-sizing: border-box;
-            width: 100%;
-            border-radius: 1em 0 0 1em;
-            padding: 1em 0 1em 1em;
-        }
-        button {
-            border-radius: 0 1em 1em 0;
-            margin: 0;
-            margin-bottom: .25em;
-        }
-    }
+				}
+				&:first-of-type { // Always the 'Posted On' text
+					&::before, &::after {
+						content: ' ';
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						z-index: -1;
+						background-color: var(--chat-receive);
+					}
+					&::before {
+						top: 0;
+						left: 0;
+						border-radius: 1em;
+					}
+					&::after { // Block corner fill
+						width: 1em;
+					}
+				}
+				&:nth-last-child(n+2), &:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
+					// Block corner fill
+					&::before, &::after {
+						background-color: var(--chat-send);
+					}
+					&::after {
+						left: 0;
+					}
+				}
+			}
+		}
+	}
+	form {  
+		&:valid {
+			background-color: var(--chat-bg);
+		}
+		label {
+			position: absolute;
+			clip: rect(0,0,0,0);
+		}
+		display: grid;
+		grid-template-columns: 9fr 1fr;
+		textarea, button {
+			border: 0;
+		}
+		textarea {
+			font-size: 1.4em;
+			box-sizing: border-box;
+			width: 100%;
+			border-radius: 1em 0 0 1em;
+			padding: 1em 0 1em 1em;
+		}
+		button {
+			border-radius: 0 1em 1em 0;
+			margin: 0;
+			margin-bottom: .25em;
+		}
+	}
 }
 
 // Define icons
@@ -467,27 +467,27 @@ figure {
 }
 
 .loader {
-    width: 100px;
-    height: 100px;
-    span {
-        opacity: 0;
-        height: 0;
-        float: left;
-    }
-    #spinnergroup {
-        transform-origin: center;
-        animation: spinnersvg .5s infinite steps(8);
-    }
-    &.png {
-        background: url(img/loader.png) 0 0;
-        animation: spinnerpng .5s infinite steps(8);
-    }
+	width: 100px;
+	height: 100px;
+	span {
+		opacity: 0;
+		height: 0;
+		float: left;
+	}
+	#spinnergroup {
+		transform-origin: center;
+		animation: spinnersvg .5s infinite steps(8);
+	}
+	&.png {
+		background: url(img/loader.png) 0 0;
+		animation: spinnerpng .5s infinite steps(8);
+	}
 }
 
 @keyframes spinnersvg {
-    to { transform: rotate(-360deg); }
+	to { transform: rotate(-360deg); }
 }
 
 @keyframes spinnerpng {
-    to { background-position: -800px 0; }
+	to { background-position: -800px 0; }
 }
