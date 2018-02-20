@@ -1,6 +1,8 @@
 # CSS To the rescue
 This repo contains everything regarding CSS to the rescue.
 [Styleguide All components](https://vandijkstef.github.io/cssttr/styleguide.html)
+[Site with stuff](https://vandijkstef.github.io/cssttr/site/index.html)
+[Styleguide w/ site CSS](https://vandijkstef.github.io/cssttr/site/styleguide.html)(Not optimised)
 
 ## Usage
 If you are on OSX and use Firefox, note you might need to change a keyboard settings. See the know issues for more information.
@@ -30,17 +32,47 @@ Implemented Fancy ampersands. Implemented De-emphasize by dimming (ratings). Cre
 ## Thursday 15th of February 2018
 Added custom checkbox. Added loading spinner using the PNG sprite technique, but also using an animated SVG. Played a little more with the random background pattern. Added skip to content link on top of the page. Used a CSS grid to style the chat form, found that textareas dont like to be directly in a grid. Started work on form states, mainly for the input fields. Empty fields shouldn't be invalid, and can be styled using :placeholder-shown, if there is an actual placeholder set, at minumum with a space.
 
+## Tuesday 20th of February 2018
+Moving everything over to a site that makes sense, instead of a blob of styleguide.
+
 # Future/Planning/Todo
 This section will be updated throughout the process. Items will move over to the Process chapter when completed.
+- [ ] Everything hover/focus?
+- [ ] Picture with subtitle: Make max 100vh/100vw + caption text
+- [ ] Media item as hero banner
+- [ ] Extra interaction on the rating
+- [ ] Show submenu affordance on nav
+- [ ] Create better responsive nav
+- [ ] How-to step indicator: Look up examples
+- [ ] 
 - [ ] Validation formulier (voor <form> zelf)
 - [ ] Rework the components into a site that makes sense
 
-# Side-ish
-- [ ] Vertical centering (7.40)
 
-# Question
+# Side-ish
+- [ ] What did I learn (doc)
+- [ ] Vertical centering (7.40)
 - [ ] Intrinsic sizing (7.36)
 
 # Sources
 
 Rating example makes use of Emoji from: http://emojione.com
+
+
+# Page
+Pages:
+* Home
+	* Media item
+* Products
+	* Grid layout
+	* Product Detail
+		* Ratings
+* Order
+	* Login
+	* Progress
+* Contact us
+	* Chat
+	* Form
+
+All pages:
+* Nav

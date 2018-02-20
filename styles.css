@@ -70,6 +70,7 @@ a {
   outline-color: var(--focus);
 }
 
+/* Navigations */
 nav ul, nav ol {
   list-style: none;
   padding: 0;
