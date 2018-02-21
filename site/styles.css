@@ -35,6 +35,11 @@ a:hover {
   color: var(--darktoned);
 }
 
+a:focus {
+  text-decoration: underline !important;
+  /* Always underline on focus */
+}
+
 p {
   max-width: 40em;
 }
@@ -118,25 +123,15 @@ body > div:first-of-type {
   transition: var(--trans), background-color calc(var(--trans)*2) calc(var(--trans)/2);
 }
 
-body > div:first-of-type:focus-within {
-  top: 0;
-  background-color: var(--accent);
-}
-
-body > div:first-of-type:focus-within a {
+body > div:first-of-type a {
   padding: 1em;
-  background-color: var(--toned);
-  color: var(--accent);
+  color: var(--darktoned);
   outline: 0;
   position: relative;
   z-index: 99;
 }
 
-body > div:first-of-type:focus-within + * {
-  position: relative;
-}
-
-body > div:first-of-type:focus-within + *::before {
+body > div:first-of-type + *::before {
   content: ' ';
   background-color: rgba(0, 0, 0, 0.8);
   top: 0;
@@ -145,8 +140,14 @@ body > div:first-of-type:focus-within + *::before {
   left: 0;
 }
 
-body > div:first-of-type a {
-  color: var(--darktoned);
+body > div:first-of-type:focus-within {
+  top: 0;
+  background-color: var(--accent);
+}
+
+body > div:first-of-type:focus-within a {
+  background-color: var(--toned);
+  color: var(--accent);
 }
 
 body div + article:first-of-type {

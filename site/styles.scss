@@ -32,6 +32,10 @@ a {
 	&:hover {
 		color: var(--darktoned);
 	}
+	&:focus {
+		text-decoration: underline !important; /* Always underline on focus */
+		// font-style: italic;	
+	}
 }
 
 p {
@@ -105,13 +109,33 @@ body {
 		text-align: center;
 		padding: .8em 0;
 		transition: var(--trans), background-color calc(var(--trans)*2) calc(var(--trans)/2);
+		a {
+			padding: 1em;
+			color: var(--darktoned);
+			outline: 0;
+			position: relative;
+			z-index: 99;
+		}
+		+ * {
+			// filter: darken(10);
+			// position: relative;
+			&::before {
+				content: ' ';
+				background-color: rgba(0,0,0,.8);
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+			
+		}
 		&:focus-within {
 			top: 0;
 			background-color: var(--accent);
 			a {
-				padding: 1em;
 				background-color: var(--toned);
 				color: var(--accent);
+<<<<<<< Updated upstream
 				outline: 0;
 				position: relative;
 				z-index: 99;
@@ -126,10 +150,9 @@ body {
 					bottom: 0;
 					left: 0;
 				}
+=======
+>>>>>>> Stashed changes
 			}
-		}
-		a {
-			color: var(--darktoned);
 		}
 	}
 	/* "Hero" banner */
