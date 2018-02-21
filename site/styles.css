@@ -6,6 +6,7 @@
   --accent: #fae596;
   --toned: #3fb0ac;
   --darktoned: #173e43;
+  --hide: transparent;
 }
 
 @font-face {
@@ -103,6 +104,7 @@ body {
   line-height: 1.4;
   /* Skip to content */
   /* "Hero" banner */
+  /* Product page article */
 }
 
 body > div:first-of-type {
@@ -147,7 +149,7 @@ body > div:first-of-type a {
   color: var(--darktoned);
 }
 
-body article:first-of-type {
+body div + article:first-of-type {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -157,24 +159,24 @@ body article:first-of-type {
   padding: 2em;
 }
 
-body article:first-of-type h1 {
+body div + article:first-of-type h1 {
   margin: 0;
   text-align: right;
 }
 
-body article:first-of-type h1 a {
+body div + article:first-of-type h1 a {
   text-decoration: none;
   color: white;
 }
 
-body article:first-of-type p {
+body div + article:first-of-type p {
   background-color: var(--accent);
   border-radius: var(--radius);
   padding: 1.5em;
   animation: slideInLeft 1s ease-out 1.5s;
 }
 
-body article:first-of-type img {
+body div + article:first-of-type img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -185,6 +187,36 @@ body article:first-of-type img {
   max-width: 200%;
   animation: fadeInBanner 2s cubic-bezier(0.97, 0.01, 0.83, 0.67), breatheImg 8s infinite ease-in-out;
   filter: blur(10px) brightness(0.6);
+}
+
+body div + nav + article#main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+body div + nav + article#main > p, body div + nav + article#main > h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body div + nav + article#main img {
+  order: 1;
+  grid-column: 1 / -1;
+}
+
+body div + nav + article#main + fieldset {
+  margin-top: -6em;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12em, 2fr));
+  grid-gap: 1em;
+}
+
+main h1 {
+  font-size: 1.2em;
 }
 
 nav {
@@ -243,6 +275,80 @@ article > h1 {
   padding: 0 1em;
 }
 
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  color: var(--hide);
+}
+
+fieldset label svg {
+  order: -1;
+  width: 2em;
+  height: 2em;
+  transition: calc(var(--trans) * 2);
+  filter: grayscale(100%);
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+
+fieldset > div {
+  /* Added to support flex/grid view in a fieldset */
+  padding: 1em 0;
+  display: grid;
+  grid-template-columns: repeat(4, 0 25%);
+}
+
+fieldset legend {
+  position: relative;
+}
+
+fieldset:focus-within {
+  position: relative;
+  z-index: 1;
+  filter: blur(0);
+  /* De-emphasize by dimming */
+}
+
+fieldset:focus-within svg {
+  filter: grayscale(50%);
+}
+
+fieldset:focus-within::before {
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+fieldset::before {
+  position: fixed;
+  content: ' ';
+  z-index: -1;
+  /* Without this line, the site isn't usable anymo'*/
+  transition: background-color var(--trans);
+}
+
+input[type=radio] {
+  /* Display none cancels the focus interactions
+	The opacity hides it, in the CSS grid these fields are specified as having no size
+	This css should be more specific since we are hiding the radio fields */
+  opacity: 0;
+}
+
+input[type=radio]:checked + label svg {
+  filter: grayscale(0);
+  transform: scale(1.5);
+}
+
+/* Animations */
 @keyframes fadeIn {
   0% {
     opacity: 0;

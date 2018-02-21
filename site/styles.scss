@@ -6,6 +6,7 @@
 	--accent: #fae596;
 	--toned: #3fb0ac;
 	--darktoned: #173e43;
+	--hide: rgba(0,0,0,0);
 }
 
 @font-face {
@@ -43,8 +44,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 + figure {
-	// position: relative;
-	// top: -3em;
 	margin-top: -31vw;
 	img {
 		position: relative;
@@ -118,7 +117,6 @@ body {
 				z-index: 99;
 			}
 			+ * {
-				// filter: darken(10);
 				position: relative;
 				&::before {
 					content: ' ';
@@ -135,7 +133,7 @@ body {
 		}
 	}
 	/* "Hero" banner */
-	article:first-of-type {
+	div + article:first-of-type {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
@@ -170,6 +168,32 @@ body {
 			filter: blur(10px) brightness(.6);
 		}
 	}
+	/* Product page article */
+	div + nav + article#main {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		> p, > h1 {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		img {
+			order: 1;
+			grid-column: 1 / -1;
+		}
+		+ fieldset {
+			margin-top: -6em;
+		}
+	}
+}
+
+main {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(12em, 2fr));
+	grid-gap: 1em;
+	h1 {
+		font-size: 1.2em;
+	}
 }
 
 nav {
@@ -191,7 +215,6 @@ nav {
 			display: block;
 			padding: 1em 2em;
 			position: relative;
-			// z-index: 10;
 			&:hover, &:focus {
 				background-color: var(--toned);
 				color: var(--accent);
@@ -224,7 +247,71 @@ article {
 	}
 }
 
-// Animations
+fieldset {
+	border: none;
+	label {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		position: relative;
+		color: var(--hide);
+		svg {
+			order: -1;
+			width: 2em;
+			height: 2em;
+			transition: calc(var(--trans) * 2);
+			filter: grayscale(100%);
+			cursor: pointer;
+			position: absolute;
+			bottom: 0;
+		}
+	}
+	> div { /* Added to support flex/grid view in a fieldset */
+		padding: 1em 0;
+		display: grid;
+		grid-template-columns: repeat(4, 0 25%);
+	}
+	legend {
+		position: relative;
+	}
+	&:focus-within {
+		position: relative;
+		z-index: 1;
+		filter: blur(0);
+		svg {
+			filter: grayscale(50%);
+		}
+		/* De-emphasize by dimming */
+		&::before {
+			background-color: rgba(0,0,0,.8);
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+	}
+	&::before {
+		position: fixed;
+		content: ' ';
+		z-index: -1; /* Without this line, the site isn't usable anymo'*/
+		transition: background-color var(--trans);
+	}
+}
+
+input[type=radio] {
+	/* Display none cancels the focus interactions
+	The opacity hides it, in the CSS grid these fields are specified as having no size
+	This css should be more specific since we are hiding the radio fields */
+	opacity: 0;
+	&:checked + label {
+		svg {
+			filter: grayscale(0);
+			transform: scale(1.5);
+		}
+	}
+}
+
+/* Animations */
 @keyframes fadeIn {
 	0% {
 		opacity: 0;

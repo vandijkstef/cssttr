@@ -1,8 +1,8 @@
 # CSS To the rescue
 This repo contains everything regarding CSS to the rescue.
-[Styleguide All components](https://vandijkstef.github.io/cssttr/styleguide.html)
-[Site with stuff](https://vandijkstef.github.io/cssttr/site/index.html)
-[Styleguide w/ site CSS](https://vandijkstef.github.io/cssttr/site/styleguide.html)(Not optimised)
+[Styleguide All components](https://vandijkstef.github.io/cssttr/styleguide.html)   
+[Site with stuff](https://vandijkstef.github.io/cssttr/site/index.html)  
+[Styleguide w/ site CSS](https://vandijkstef.github.io/cssttr/site/styleguide.html)(Not optimised)  
 
 ## Usage
 If you are on OSX and use Firefox, note you might need to change a keyboard settings. See the know issues for more information.
@@ -61,10 +61,11 @@ Rating example makes use of Emoji from: http://emojione.com
 
 # Page
 Pages:
-* Home
+* Home [DONE]
 	* Media item
-* Products
+* Products [Rating CSS -> Order button]
 	* Grid layout
+	* Vertical styling
 	* Product Detail
 		* Ratings
 * Order
