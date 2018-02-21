@@ -3,21 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Home | Thing &amp; Stuff</title>
+		<title>Stuff | Thing &amp; Stuff</title>
 		<link rel="stylesheet" href="styles.css">
 		<!-- <link rel="stylesheet" href="REVENGE.CSS/revenge.css"> -->
 	</head>
 	<body>
 		<div><a href="#main">Skip to content</a></div>
-		<!-- <h1>Living &amp; Styleguide</h1> -->
-
-		<!-- media-item.html -->
-		<article>
-			<h1><a href="#main">Things &amp; Stuffs</a></h1>
-			<img src="img/lights-blur3.jpeg" alt="A colorful header." />
-			<p>At Things &amp; Stuff you will find all the things you need, and some stuff you will never need. You will like the stuff more, we are sure.</p>
-		</article>
-
 		<!-- navigation.html -->
 		<nav>
 			<h1>Main navigation</h1>
@@ -35,24 +26,6 @@
 				<li><a href="/site/contact.html">Contact us</a></li>
 			</ul>
 		</nav>
-
-		<!-- picture-with-subtitle.html -->
-		<!-- Providing main ID for the skip to content link -->
-		<article id="main">
-			<h1>Things &amp; Gifts</h1>
-			<figure>
-				<!-- Portrait -->
-				<img src="img/gift_P.jpeg" alt="A drawing of a colorful monster on a newspaper" />
-				<!-- Landscape -->
-				<img src="img/gift_L.jpeg" alt="A bulldozer transporting a beach house along a sunny beach" />
-				<figcaption>
-					<p>Yesterday's the past, tomorrow's the future, but today is a gift. That's why it's called the present.</p>
-					<footer>
-						<time datetime="1994-08-31">31-8-1994</time> © 1994 <a href="https://www.brainyquote.com/quotes/bil_keane_121860">Bil Keane</a>
-					</footer>
-				</figcaption>
-			</figure>
-		</article>
 
 		<!-- step-indicator.html -->
 		<!-- <nav>
@@ -81,10 +54,10 @@
 
 		<!-- rating.html -->
 		<!-- A fieldset cannot be styled as flexbox or grid in any other browser then Firefox -->
-		<!-- <fieldset>
+		<fieldset>
 			<legend>Rating</legend>
-			<div class="changed"> This div is added to support grid styling in fieldset for non-firefox browsers  -->
-				<!-- <input type="radio" name="rating" id="rating-0">
+			<div class="changed"> <!-- This div is added to support grid styling in fieldset for non-firefox browsers  -->
+				<input type="radio" name="rating" id="rating-0">
 				<label for="rating-0">
 					Sad!
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#ef5350"/><path d="m41 49.7c-5.8-4.8-12.2-4.8-18 0-.7.6-1.3-.4-.8-1.3 1.8-3.4 5.3-6.5 9.8-6.5s8.1 3.1 9.8 6.5c.5.8-.1 1.8-.8 1.3" fill="#302424"/><path d="m10.2 24.9c-1.5 4.7.6 10 5.3 12.1 4.6 2.2 10 .5 12.7-3.7l-6.9-7.7-11.1-.7" fill="#fff"/><g fill="#302424"><path d="m14.2 25.8c-1.4 2.9-.1 6.4 2.8 7.7 2.9 1.4 6.4.1 7.7-2.8 1-1.9-9.6-6.8-10.5-4.9"/><path d="m10.2 24.9c1.6-1 3.5-1.5 5.4-1.5 1.9 0 3.8.5 5.6 1.3 1.7.8 3.3 2 4.6 3.4 1.2 1.5 2.2 3.2 2.4 5.1-1.3-1.3-2.6-2.4-4-3.4-1.4-1-2.8-1.8-4.2-2.4-1.5-.7-3-1.2-4.6-1.7-1.8-.3-3.4-.6-5.2-.8"/></g><path d="m53.8 24.9c1.5 4.7-.6 10-5.3 12.1-4.6 2.2-10 .5-12.7-3.7l6.9-7.7 11.1-.7" fill="#fff"/><g fill="#302424"><path d="m49.8 25.8c1.4 2.9.1 6.4-2.8 7.7-2.9 1.4-6.4.1-7.7-2.8-1-1.9 9.6-6.8 10.5-4.9"/><path d="m53.8 24.9c-1.6-1-3.5-1.5-5.4-1.5-1.9 0-3.8.5-5.6 1.3-1.7.8-3.3 2-4.6 3.4-1.2 1.5-2.2 3.2-2.4 5.1 1.3-1.3 2.6-2.4 4-3.4 1.4-1 2.8-1.8 4.2-2.4 1.5-.7 3-1.2 4.6-1.7 1.8-.3 3.4-.6 5.2-.8"/></g></svg>
@@ -105,7 +78,7 @@
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#ffdd67"/><path d="m49.7 34.4c-.4-.5-1.1-.4-1.9-.4-15.8 0-15.8 0-31.6 0-.8 0-1.5-.1-1.9.4-3.9 5 .7 19.6 17.7 19.6 17 0 21.6-14.6 17.7-19.6" fill="#664e27"/><path d="m33.8 41.7c-.6 0-1.5.5-1.1 2 .2.7 1.2 1.6 1.2 2.8 0 2.4-3.8 2.4-3.8 0 0-1.2 1-2 1.2-2.8.3-1.4-.6-2-1.1-2-1.6 0-4.1 1.7-4.1 4.6 0 3.2 2.7 5.8 6 5.8 3.3 0 6-2.6 6-5.8-.1-2.8-2.7-4.5-4.3-4.6" fill="#4c3526"/><path d="m24.3 50.7c2.2 1 4.8 1.5 7.7 1.5 2.9 0 5.5-.6 7.7-1.5-2.1-1.1-4.7-1.7-7.7-1.7s-5.6.6-7.7 1.7" fill="#ff717f"/><path d="m47 36c-15 0-15 0-29.9 0-2.1 0-2.1 4-.1 4 10.4 0 19.6 0 30 0 2 0 2-4 0-4" fill="#fff"/><g fill="#664e27"><circle cx="20.5" cy="23" r="5"/><circle cx="43.5" cy="23" r="5"/></g></svg>
 				</label>
 			</div>
-		</fieldset> -->
+		</fieldset>
 		
 		<!-- chat.html -->
 		<!-- <section id="chat" class="changed"> -->
