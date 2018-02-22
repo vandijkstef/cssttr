@@ -128,18 +128,7 @@ nav {
 }
 
 
-// Progress bar
-// progress {
-//     // TODO: Anim
-//     &[value] {
-//         &::-webkit-progress-value, &::-moz-progress-bar { background: red; }
-//         &::-webkit-progress-bar {
-//             background: pink;
-//         }
-//     }
-//     width: 100%;
-// }
-
+/* Progress bar */
 progress {
 	-webkit-appearance: none;
 	overflow: hidden;
@@ -155,9 +144,6 @@ progress {
 }
 // Form related stuff
 form {
-	// [autofocus] {
-	// 	display: none; // TODO: Temp disable to kill autofocus
-	// }
 	label {
 		flex-direction: row;
 		justify-content: flex-start;
@@ -336,10 +322,6 @@ article, #chat > *, form, fieldset, nav:nth-of-type(2) {
 
 // Figure display
 figure {
-	// TODO: What if we only have one image?
-	// Or a video?
-	// TODO: Do we wanna overlay the title/text (on hover/focus)
-	// margin: 0; // Let the figure take up all the space
 	position: relative;
 	margin: 0;
 	@media screen and (orientation: landscape){

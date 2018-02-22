@@ -7,6 +7,9 @@
 	--toned: #3fb0ac;
 	--darktoned: #173e43;
 	--hide: rgba(0,0,0,0);
+	--show: rgba(0,0,0,1);
+	--chat-receive: #90CAF9;
+	--chat-send: #81C784;
 }
 
 @font-face {
@@ -45,6 +48,9 @@ p {
 h1, h2, h3, h4, h5, h6 {
 	font-family: Ampersand, var(--fontstack);
 	font-size: 9vw;
+	section & {
+		font-size: 3em;
+	}
 }
 
 h1 + figure {
@@ -65,7 +71,6 @@ figure {
 		}
 	}
 	@media screen and (orientation: portrait){
-		// TODO: Put title on img
 		img:nth-of-type(2) {
 			display: none;
 		}
@@ -117,8 +122,6 @@ body {
 			z-index: 99;
 		}
 		+ * {
-			// filter: darken(10);
-			// position: relative;
 			&::before {
 				content: ' ';
 				background-color: rgba(0,0,0,.8);
@@ -135,7 +138,6 @@ body {
 			a {
 				background-color: var(--toned);
 				color: var(--accent);
-<<<<<<< Updated upstream
 				outline: 0;
 				position: relative;
 				z-index: 99;
@@ -150,8 +152,6 @@ body {
 					bottom: 0;
 					left: 0;
 				}
-=======
->>>>>>> Stashed changes
 			}
 		}
 	}
@@ -194,7 +194,13 @@ body {
 	/* Product page article */
 	div + nav + article#main {
 		display: grid;
-		grid-template-columns: 50% 50%;
+		grid-template-columns: 100%;
+		@media (min-width: 40em) {
+			grid-template-columns: 50% 50%;
+		}
+		> p {
+			padding: 0 1em;
+		}
 		> p, > h1 {
 			display: flex;
 			flex-direction: column;
@@ -208,46 +214,132 @@ body {
 			margin-top: -6em;
 		}
 	}
+	> ul {
+		display: flex;
+		justify-content: flex-end;
+		flex-direction: column;
+		padding: 1em 0;
+		max-width: 40em;
+		margin: 0 auto;
+		list-style: none;
+		li {
+			display: flex;
+			max-height: 8em;
+			justify-content: space-between;
+			align-items: baseline;
+			background-color: var(--darktoned);
+			padding: 1em 2em;
+			margin-bottom: 1em;
+			border-radius: calc(var(--radius)*8) var(--radius);
+			box-shadow: 0 .2em 0 var(--toned);
+			* {
+				display: inline;
+			}
+		}
+		h1 {
+			font-size: 1.2em;
+			margin: 0 1em 0 0;
+			a {
+				color: var(--accent);
+				&:hover, &:focus {
+					color: var(--toned);
+				}
+			}
+		}
+		img {
+			min-width: 0;
+			max-width: 10em;
+			min-height: 0;
+		}
+	}
 }
 
 main {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(12em, 2fr));
-	grid-gap: 1em;
-	h1 {
-		font-size: 1.2em;
+	grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+	grid-gap: 2em;
+	padding: 2em;
+	background-color: var(--toned);
+	background-image:
+		linear-gradient(90deg, rgba(180, 180, 180, .2) 0, rgba(255, 255, 255, .2) .6em, transparent 0),
+		linear-gradient(90deg, rgba(255, 255, 255, .2) 2em, transparent 0);
+	background-size: 2em 40%, 2.7em 100%, 2em 100%;
+	> article {
+		background-color: var(--accent);
+		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		// grid-row: span 1;
+		h1 {
+			font-size: 1.8em;
+			margin-bottom: 0;
+			padding: 0;
+			order: 2;
+		}
+		a {
+			text-decoration: none;
+		}
 	}
 }
 
-nav {
+nav:first-of-type {
+	/* This needs to be above the regular nav, otherwise the border-color change is ignored */
 	border-top: .5em solid var(--darktoned);
-	transition: var(--trans);
-	&:focus-within, &:hover {
-		border-color: var(--toned);
-	}
 	ul, ol {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		justify-content: space-around;
 		background-color: var(--accent);
+		li {
+			padding: 0;
+		}
 		a {
-			color: var(--darktoned);
-			text-decoration: none;
-			display: block;
 			padding: 1em 2em;
-			position: relative;
+			color: var(--darktoned);
+			&::before {
+				content: "\0026";
+				font-family: Ampersand;
+				padding-right: .2em;
+				color: var(--toned);
+			}
 			&:hover, &:focus {
 				background-color: var(--toned);
 				color: var(--accent);
 				outline: 0;
 			}
 		}
+	}
+}
+
+nav {
+	transition: var(--trans);
+	display: grid;
+	&:focus-within, &:hover {
+		border-color: var(--toned);
+	}
+	ul, ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: space-around;
+		background-color: var(--darktoned);
+		color: var(--toned);
+		li {
+			padding: 1em 2em;
+		}
+		a {
+			color: var(--accent);
+			text-decoration: none;
+			display: block;
+			// padding: 1em 2em;
+			position: relative;
+			&:hover, &:focus {
+				color: var(--toned);
+			}
+		}
 		ul {
 			display: none; /* Needed to disable focus interaction */
 			position: absolute;
 			width: 100%;
+			z-index: 99;
 		}
 		li {
 			position: relative;
@@ -257,12 +349,19 @@ nav {
 				display: inline-block;
 				animation: fadeIn calc(var(--trans)) linear;
 			}
+			a:hover, a:focus {
+				&::before{
+					color: var(--accent);
+				}
+			}
 		}
 	}
 	h1 {
 		display: none;
 	}
 }
+
+
 
 article {
 	> h1 {
@@ -334,6 +433,248 @@ input[type=radio] {
 	}
 }
 
+/* Progress bar */
+progress {
+	-webkit-appearance: none;
+	overflow: hidden;
+	height: 1.4em;
+	display: block;
+	width: 100%;
+	order: 1;
+	border-bottom: .5em solid var(--darktoned);
+	&::-webkit-progress-bar { // The full bar
+		// background-color: yellow;
+	}
+	&::-webkit-progress-value { // The value
+		background-color: var(--chat-send);
+	}
+}
+
+#chat {
+	background-color: var(--bg);
+	color: var(--darktoned);
+	position: relative;
+	z-index: 0;
+	max-width: 40em;
+	margin: 0 auto;
+	ol {
+		padding: 0;
+		list-style: none;
+		li {
+			padding: .5em 1em;
+			margin-bottom: .8em;
+			position: relative; // For the footer::after
+			p {
+				margin: 0;
+			}
+		}
+		footer {
+			display: flex;
+			justify-content: space-between;
+			p {
+				font-size: .8em;
+				+ p {
+					// Hide the text while still be able to show the icon
+					color: var(--hide);
+				}
+				&::before {
+					float: right;
+					color: var(--show);
+				}
+				&:first-of-type { // Always the 'Posted On' text
+					&::before, &::after {
+						content: ' ';
+						position: absolute;
+						bottom: 0;
+						right: 0;
+						z-index: -1;
+						background-color: var(--chat-receive);
+					}
+					&::before {
+						top: 0;
+						left: 0;
+						border-radius: 1em;
+					}
+					&::after { // Block corner fill
+						width: 1em;
+					}
+				}
+				&:nth-last-child(n+2), &:nth-last-child(n+2) ~ p { // Both P's IF there is at least 2
+					// Block corner fill
+					&::before, &::after {
+						background-color: var(--chat-send);
+					}
+					&::after {
+						left: 0;
+					}
+				}
+			}
+		}
+	}
+	form {  
+		&:valid {
+			background-color: var(--chat-bg);
+			[type=submit] {
+				background-color: var(--chat-send);
+			}
+		}
+		label {
+			position: absolute;
+			clip: rect(0,0,0,0);
+		}
+		display: grid;
+		grid-template-columns: 9fr 1fr;
+		textarea, button {
+			border: 0;
+		}
+		textarea {
+			font-size: 1.4em;
+			box-sizing: border-box;
+			width: 100%;
+			border-radius: 1em 0 0 1em;
+			padding: 1em 0 1em 1em;
+		}
+		button {
+			border-radius: 0 1em 1em 0;
+			margin: 0;
+			margin-bottom: .25em;
+		}
+	}
+}
+
+// Form related stuff
+form {
+	label {
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	& > a {
+		display: inline-block;
+	}
+	&:valid {
+		background-color: var(--chat-send);
+	}
+	ul + & {
+		margin: 0 auto;
+		max-width: 40em;
+		// min-width: 30em;
+		display: flex;
+		flex-direction: column;
+		// padding: 0 30%;
+
+		align-items: center;
+	}
+}
+
+fieldset label {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+	color: var(--hide);
+	svg {
+		order: -1;
+		width: 2em;
+		height: 2em;
+		transition: calc(var(--trans) * 2);
+		filter: grayscale(100%);
+		cursor: pointer;
+		position: absolute;
+		bottom: 0;
+	}
+}
+
+input, button {
+	display: block;
+	font-size: 1.1em;
+	margin-bottom: 1em;
+	margin-top: .5em;
+	padding: .2em;
+	border: 3px solid gray;
+	&:invalid {
+		border-color: red;
+	}
+	&:placeholder-shown {
+		border-color: orange;
+	}
+	&:valid {
+		border-color: var(--chat-send);
+	}
+	&[type=submit] {
+		position: relative;
+		margin: 1.2em 0;
+		&::before {
+			content: ' ';
+			position: absolute;
+			top: -1em;
+			bottom: -1em;
+			left: -1em;
+			right: -1em;
+		}
+		// This should start working with focus visible.
+		// Unfortunately the focus event fires before the click thus the button is focused on the larger size, but never actually pressed
+		// &:focus {
+		//     outline-color: red;
+		//     padding: -1em;
+		//     &::before {
+		//         top: 0;
+		//         bottom: 0;
+		//         left: 0;
+		//         right: 0;
+		//     }
+		// }
+	}
+}
+
+input[type=checkbox] {
+	position: absolute;
+	clip: rect(0,0,0,0);
+	+ label {
+		display: inline-block;
+		border-radius: .2em;
+		cursor: pointer;
+		&::before {
+			content: '';
+			transition: var(--trans);
+			display: inline-block;
+			vertical-align: -.15em;
+			width: 1em;
+			height: 1em;
+			margin-right: .4em;
+			border-radius: .2em;
+			background-color: var(--chat-receive);
+			text-indent: .15em;
+			line-height: .65;
+			box-shadow: 1px 1px 1px rgba(0,0,0,1);
+		}
+	}
+	&:checked {
+		+ label {
+			&::before {
+				background-color: var(--chat-send);
+				box-shadow: 1px 1px 1px inset;
+			}
+		}
+	}
+	&:focus {
+		+ label {
+			outline: auto 5px var(--focus);
+		}
+	}
+}
+
+/* Define icons */
+[data-status=DELIVERED] {
+	&::before {
+		content: '📬';
+	}
+}
+[data-status=READ] {
+	&::before {
+		content: '📭';
+	}
+}
+
 /* Animations */
 @keyframes fadeIn {
 	0% {
@@ -365,6 +706,6 @@ input[type=radio] {
 }
 
 /* Added this to remove some personal plugin from displaying the IP address */
-#tqShowIP {
+#tqShowIP, #chrome_websiteIP {
 	display: none;
 }

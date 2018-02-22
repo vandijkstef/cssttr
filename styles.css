@@ -132,6 +132,7 @@ nav:first-of-type a {
   padding: .5em 0;
 }
 
+/* Progress bar */
 progress {
   -webkit-appearance: none;
   overflow: hidden;

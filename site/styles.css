@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --radius: .3em;
   --trans: .2s;
@@ -7,6 +8,9 @@
   --toned: #3fb0ac;
   --darktoned: #173e43;
   --hide: transparent;
+  --show: black;
+  --chat-receive: #90CAF9;
+  --chat-send: #81C784;
 }
 
 @font-face {
@@ -47,6 +51,10 @@ p {
 h1, h2, h3, h4, h5, h6 {
   font-family: Ampersand, var(--fontstack);
   font-size: 9vw;
+}
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+  font-size: 3em;
 }
 
 h1 + figure {
@@ -148,6 +156,22 @@ body > div:first-of-type:focus-within {
 body > div:first-of-type:focus-within a {
   background-color: var(--toned);
   color: var(--accent);
+  outline: 0;
+  position: relative;
+  z-index: 99;
+}
+
+body > div:first-of-type:focus-within + * {
+  position: relative;
+}
+
+body > div:first-of-type:focus-within + *::before {
+  content: ' ';
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 body div + article:first-of-type {
@@ -192,7 +216,17 @@ body div + article:first-of-type img {
 
 body div + nav + article#main {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 100%;
+}
+
+@media (min-width: 40em) {
+  body div + nav + article#main {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+body div + nav + article#main > p {
+  padding: 0 1em;
 }
 
 body div + nav + article#main > p, body div + nav + article#main > h1 {
@@ -210,19 +244,113 @@ body div + nav + article#main + fieldset {
   margin-top: -6em;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12em, 2fr));
-  grid-gap: 1em;
+body > ul {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 1em 0;
+  max-width: 40em;
+  margin: 0 auto;
+  list-style: none;
 }
 
-main h1 {
+body > ul li {
+  display: flex;
+  max-height: 8em;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: var(--darktoned);
+  padding: 1em 2em;
+  margin-bottom: 1em;
+  border-radius: calc(var(--radius)*8) var(--radius);
+  box-shadow: 0 0.2em 0 var(--toned);
+}
+
+body > ul li * {
+  display: inline;
+}
+
+body > ul h1 {
   font-size: 1.2em;
+  margin: 0 1em 0 0;
+}
+
+body > ul h1 a {
+  color: var(--accent);
+}
+
+body > ul h1 a:hover, body > ul h1 a:focus {
+  color: var(--toned);
+}
+
+body > ul img {
+  min-width: 0;
+  max-width: 10em;
+  min-height: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+  grid-gap: 2em;
+  padding: 2em;
+  background-color: var(--toned);
+  background-image: linear-gradient(90deg, rgba(180, 180, 180, 0.2) 0, rgba(255, 255, 255, 0.2) 0.6em, transparent 0), linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2em, transparent 0);
+  background-size: 2em 40%, 2.7em 100%, 2em 100%;
+}
+
+main > article {
+  background-color: var(--accent);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+main > article h1 {
+  font-size: 1.8em;
+  margin-bottom: 0;
+  padding: 0;
+  order: 2;
+}
+
+main > article a {
+  text-decoration: none;
+}
+
+nav:first-of-type {
+  /* This needs to be above the regular nav, otherwise the border-color change is ignored */
+  border-top: 0.5em solid var(--darktoned);
+}
+
+nav:first-of-type ul, nav:first-of-type ol {
+  background-color: var(--accent);
+}
+
+nav:first-of-type ul li, nav:first-of-type ol li {
+  padding: 0;
+}
+
+nav:first-of-type ul a, nav:first-of-type ol a {
+  padding: 1em 2em;
+  color: var(--darktoned);
+}
+
+nav:first-of-type ul a::before, nav:first-of-type ol a::before {
+  content: "\0026";
+  font-family: Ampersand;
+  padding-right: .2em;
+  color: var(--toned);
+}
+
+nav:first-of-type ul a:hover, nav:first-of-type ul a:focus, nav:first-of-type ol a:hover, nav:first-of-type ol a:focus {
+  background-color: var(--toned);
+  color: var(--accent);
+  outline: 0;
 }
 
 nav {
-  border-top: 0.5em solid var(--darktoned);
   transition: var(--trans);
+  display: grid;
 }
 
 nav:focus-within, nav:hover {
@@ -231,25 +359,27 @@ nav:focus-within, nav:hover {
 
 nav ul, nav ol {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: space-around;
-  background-color: var(--accent);
+  background-color: var(--darktoned);
+  color: var(--toned);
+}
+
+nav ul li, nav ol li {
+  padding: 1em 2em;
 }
 
 nav ul a, nav ol a {
-  color: var(--darktoned);
+  color: var(--accent);
   text-decoration: none;
   display: block;
-  padding: 1em 2em;
   position: relative;
 }
 
 nav ul a:hover, nav ul a:focus, nav ol a:hover, nav ol a:focus {
-  background-color: var(--toned);
-  color: var(--accent);
-  outline: 0;
+  color: var(--toned);
 }
 
 nav ul ul, nav ol ul {
@@ -257,6 +387,7 @@ nav ul ul, nav ol ul {
   /* Needed to disable focus interaction */
   position: absolute;
   width: 100%;
+  z-index: 99;
 }
 
 nav ul li, nav ol li {
@@ -266,6 +397,10 @@ nav ul li, nav ol li {
 nav ul li:hover ul, nav ul li:focus-within ul, nav ol li:hover ul, nav ol li:focus-within ul {
   display: inline-block;
   animation: fadeIn calc(var(--trans)) linear;
+}
+
+nav ul li:hover a:hover::before, nav ul li:hover a:focus::before, nav ul li:focus-within a:hover::before, nav ul li:focus-within a:focus::before, nav ol li:hover a:hover::before, nav ol li:hover a:focus::before, nav ol li:focus-within a:hover::before, nav ol li:focus-within a:focus::before {
+  color: var(--accent);
 }
 
 nav h1 {
@@ -349,6 +484,245 @@ input[type=radio]:checked + label svg {
   transform: scale(1.5);
 }
 
+/* Progress bar */
+progress {
+  -webkit-appearance: none;
+  overflow: hidden;
+  height: 1.4em;
+  display: block;
+  width: 100%;
+  order: 1;
+  border-bottom: 0.5em solid var(--darktoned);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--chat-send);
+}
+
+#chat {
+  background-color: var(--bg);
+  color: var(--darktoned);
+  position: relative;
+  z-index: 0;
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+#chat ol {
+  padding: 0;
+  list-style: none;
+}
+
+#chat ol li {
+  padding: .5em 1em;
+  margin-bottom: .8em;
+  position: relative;
+}
+
+#chat ol li p {
+  margin: 0;
+}
+
+#chat ol footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#chat ol footer p {
+  font-size: .8em;
+}
+
+#chat ol footer p + p {
+  color: var(--hide);
+}
+
+#chat ol footer p::before {
+  float: right;
+  color: var(--show);
+}
+
+#chat ol footer p:first-of-type::before, #chat ol footer p:first-of-type::after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: var(--chat-receive);
+}
+
+#chat ol footer p:first-of-type::before {
+  top: 0;
+  left: 0;
+  border-radius: 1em;
+}
+
+#chat ol footer p:first-of-type::after {
+  width: 1em;
+}
+
+#chat ol footer p:nth-last-child(n+2)::before, #chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::before, #chat ol footer p:nth-last-child(n+2) ~ p::after {
+  background-color: var(--chat-send);
+}
+
+#chat ol footer p:nth-last-child(n+2)::after, #chat ol footer p:nth-last-child(n+2) ~ p::after {
+  left: 0;
+}
+
+#chat form {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+
+#chat form:valid {
+  background-color: var(--chat-bg);
+}
+
+#chat form:valid [type=submit] {
+  background-color: var(--chat-send);
+}
+
+#chat form label {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+#chat form textarea, #chat form button {
+  border: 0;
+}
+
+#chat form textarea {
+  font-size: 1.4em;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 1em 0 0 1em;
+  padding: 1em 0 1em 1em;
+}
+
+#chat form button {
+  border-radius: 0 1em 1em 0;
+  margin: 0;
+  margin-bottom: .25em;
+}
+
+form label {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+form > a {
+  display: inline-block;
+}
+
+form:valid {
+  background-color: var(--chat-send);
+}
+
+ul + form {
+  margin: 0 auto;
+  max-width: 40em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  color: var(--hide);
+}
+
+fieldset label svg {
+  order: -1;
+  width: 2em;
+  height: 2em;
+  transition: calc(var(--trans) * 2);
+  filter: grayscale(100%);
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+
+input, button {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 1em;
+  margin-top: .5em;
+  padding: .2em;
+  border: 3px solid gray;
+}
+
+input:invalid, button:invalid {
+  border-color: red;
+}
+
+input:placeholder-shown, button:placeholder-shown {
+  border-color: orange;
+}
+
+input:valid, button:valid {
+  border-color: var(--chat-send);
+}
+
+input[type=submit], button[type=submit] {
+  position: relative;
+  margin: 1.2em 0;
+}
+
+input[type=submit]::before, button[type=submit]::before {
+  content: ' ';
+  position: absolute;
+  top: -1em;
+  bottom: -1em;
+  left: -1em;
+  right: -1em;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+input[type=checkbox] + label {
+  display: inline-block;
+  border-radius: .2em;
+  cursor: pointer;
+}
+
+input[type=checkbox] + label::before {
+  content: '';
+  transition: var(--trans);
+  display: inline-block;
+  vertical-align: -.15em;
+  width: 1em;
+  height: 1em;
+  margin-right: .4em;
+  border-radius: .2em;
+  background-color: var(--chat-receive);
+  text-indent: .15em;
+  line-height: .65;
+  box-shadow: 1px 1px 1px black;
+}
+
+input[type=checkbox]:checked + label::before {
+  background-color: var(--chat-send);
+  box-shadow: 1px 1px 1px inset;
+}
+
+input[type=checkbox]:focus + label {
+  outline: auto 5px var(--focus);
+}
+
+/* Define icons */
+[data-status=DELIVERED]::before {
+  content: '📬';
+}
+
+[data-status=READ]::before {
+  content: '📭';
+}
+
 /* Animations */
 @keyframes fadeIn {
   0% {
@@ -381,6 +755,6 @@ input[type=radio]:checked + label svg {
 }
 
 /* Added this to remove some personal plugin from displaying the IP address */
-#tqShowIP {
+#tqShowIP, #chrome_websiteIP {
   display: none;
 }
