@@ -1,8 +1,8 @@
 # CSS To the rescue
 This repo contains everything regarding CSS to the rescue.
 [Styleguide All components](https://vandijkstef.github.io/cssttr/styleguide.html)   
-[Site with stuff](https://vandijkstef.github.io/cssttr/site/index.html)  
-[Styleguide w/ site CSS](https://vandijkstef.github.io/cssttr/site/styleguide.html)(Not optimised)  
+[Site with stuff](https://vandijkstef.github.io/cssttr/cssttr/site/index.html)  
+[Styleguide w/ site CSS](https://vandijkstef.github.io/cssttr/cssttr/site/styleguide.html)(Not optimised)  
 
 ## Usage
 If you are on OSX and use Firefox, note you might need to change a keyboard settings. See the know issues for more information.
